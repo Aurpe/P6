@@ -1,10 +1,10 @@
-const API_BASE_URL = "http://localhost:5678/api-docs/";
+const API_BASE_URL = "http://localhost:5678/api/";
 
-function getWorks (displayWorks){
+function getWorks (){
     return fetch (`${API_BASE_URL}works`) //Route pour recuperer Works via l'api
     .then (response => response.json()) // on demande à la réponse d'être traduite en json
     .then(data => {
-        console.log(data);
+        console.table(data);
         displayWorks(data);
     })
     .catch(error =>{
@@ -22,11 +22,10 @@ function displayWorks(images) {
     galleryDiv.innerHTML = ''
 
     images.forEach(image => {
-        const galleryItem = document.createElement('div');
-        galleryItem.classList.add('gallery');
+        const galleryItem = document.createElement('figure');
 
         const imgElement = document.createElement('img');
-        imgElement.src = image.url;
+        imgElement.src = image.imageUrl;
         imgElement.alt = image.title;
 
         const titleElement = document.createElement('h3');
@@ -38,7 +37,7 @@ function displayWorks(images) {
     });
 }
 
-getWorks(displayWorks)
+getWorks()
 
 /*const galleryData = [
   // { src:"assets/images/abajour-tahina.png ",title: "Abat-jour Tahina" },
