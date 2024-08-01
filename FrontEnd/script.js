@@ -40,10 +40,10 @@ function displayWorks(images) {
 
 getWorks(displayWorks)
 
-/*const galleryData = [
-  // { src:"assets/images/abajour-tahina.png ",title: "Abat-jour Tahina" },
-   // { src: "assets/images/appartement-paris-v.png", title: "Appartement Paris V" },
-    //{ src: "assets/images/restaurant-sushisen-londres.png", title: "Restaurant Sushi Zen" },
+const galleryData = [
+    { src:"assets/images/abajour-tahina.png ",title: "Abat-jour Tahina" },
+    { src: "assets/images/appartement-paris-v.png", title: "Appartement Paris V" },
+    { src: "assets/images/restaurant-sushisen-londres.png", title: "Restaurant Sushi Zen" },
     { src: "assets/images/la-balisiere.png", title: "Villa la Balisière" },
     { src: "assets/images/structures-thermopolis.png", title: "Structure Thermopolis" },
     { src: "assets/images/appartement-paris-x.png", title: "Appartement Paris X " },
@@ -54,7 +54,6 @@ getWorks(displayWorks)
     { src: "assets/images/hotel-first-arte-new-delhi.png", title: "Hotel First Arte - New Delhi" },
 ]; // Tableau avec les images et les titres 
 
-integration de GaleryMedia dans la div Gallery
 const galleryMedia = document.querySelector(".gallery");
 
 if (galleryMedia) {
@@ -75,9 +74,25 @@ if (galleryMedia) {
 
         galleryDiv.appendChild(galleryItem);
     }
-}*/
+}
 
-const btnCategories= {
+titleButton= ["Tous","Objets","Appartements","Hotel & restaurants"]
+
+const galleryDiv = document.querySelector(".gallery");
+
+if (galleryDiv) {
+
+for (let i = 0; i < titleButton.length; i++) {
+    const buttonElement = document.createElement ("button");
+    buttonElement.innerHTML = titleButton[i];
+
+galleryDiv.appendChild(buttonElement)
+}}
+
+
+getCategories();
+
+/*const btnCategories= {
     url:"http://localhost:5678/api/categories",
     title:"Categories",
 }
@@ -105,22 +120,5 @@ function createCategoryButtons(categories) {
         button.addEventListener('click', () => filterWorks(category.name)); // Gestionnaire d'événements pour le clic
         filtersDiv.appendChild(button); 
     });
-}
-
-getCategories();
-
-
-
-/*titleButton= ["Tous","Objets","Appartements","Hotel & restaurants"]
-
-const galleryDiv = document.querySelector(".gallery");
-
-if (galleryDiv) {
-
-for (let i = 0; i < titleButton.length; i++) {
-    //const buttonElement = document.createElement ("button");
-    //buttonElement.innerHTML = titleButton[i];
-
-galleryDiv.appendChild(buttonElement)*/
-
+}*/
 
