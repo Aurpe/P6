@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:5678/api-docs/";
+const API_BASE_URL = "http://localhost:5678/api/";
 
 function getWorks (displayWorks){
     return fetch (`${API_BASE_URL}works`) //Route pour recuperer Works via l'api
