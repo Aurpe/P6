@@ -1,17 +1,16 @@
 const API_BASE_URL = "http://localhost:5678/api/";
 
-function getWorks (displayWorks){
+function getWorks (){
     return fetch (`${API_BASE_URL}works`) //Route pour recuperer Works via l'api
     .then (response => response.json()) // on demande à la réponse d'être traduite en json
     .then(data => {
-        console.log(data);
+        console.table(data);
         displayWorks(data);
     })
     .catch(error =>{
         console.log()
     })
 }
-
 const image = {
     url: "http://localhost:5678/api/works",
     title: "Images"
@@ -22,11 +21,11 @@ function displayWorks(images) {
     galleryDiv.innerHTML = ''
 
     images.forEach(image => {
-        const galleryItem = document.createElement('div');
-        galleryItem.classList.add('gallery');
+        const galleryItem = document.createElement('figure');
+        galleryItem.classList.add('figure')
 
         const imgElement = document.createElement('img');
-        imgElement.src = image.url;
+        imgElement.src = image.imageUrl;
         imgElement.alt = image.title;
 
         const titleElement = document.createElement('h3');
@@ -38,76 +37,71 @@ function displayWorks(images) {
     });
 }
 
-getWorks(displayWorks)
+getWorks()
 
-const galleryData = [
-    { src:"assets/images/abajour-tahina.png ",title: "Abat-jour Tahina" },
-    { src: "assets/images/appartement-paris-v.png", title: "Appartement Paris V" },
-    { src: "assets/images/restaurant-sushisen-londres.png", title: "Restaurant Sushi Zen" },
-    { src: "assets/images/la-balisiere.png", title: "Villa la Balisière" },
-    { src: "assets/images/structures-thermopolis.png", title: "Structure Thermopolis" },
-    { src: "assets/images/appartement-paris-x.png", title: "Appartement Paris X " },
-    { src: "assets/images/le-coteau-cassis.png", title: "Pavillon, 'Le Coteau',Cassis" },
-    { src: "assets/images/villa-ferneze.png", title: "Villa Ferneze- Isola d'Elba" },
-    { src: "assets/images/appartement-paris-xviii.png", title: "Appartement Paris XVIII" },
-    { src: "assets/images/bar-lullaby-paris.png", title: "Bar Lullaby" },
-    { src: "assets/images/hotel-first-arte-new-delhi.png", title: "Hotel First Arte - New Delhi" },
-]; // Tableau avec les images et les titres 
 
-const galleryMedia = document.querySelector(".gallery");
 
-if (galleryMedia) {
-    // Boucle pour créer et ajouter chaque élément de la galerie
-    for (let i = 0; i < galleryData.length; i++) { // 
-        const galleryItem = document.createElement("div");
-        galleryItem.classList.add("gallery-img");
-
-        const imgElement = document.createElement("img"); //Ajout des imgs 
-        imgElement.src = galleryData[i].src;
-        imgElement.alt = galleryData[i].title;
-
-        const titleElement = document.createElement("h3"); // Creation de l'elément titre
-        titleElement.textContent = galleryData[i].title;
-
-        galleryItem.appendChild(imgElement);
-        galleryItem.appendChild(titleElement); 
-
-        galleryDiv.appendChild(galleryItem);
-    }
+function getCategories (){
+    return fetch (`${API_BASE_URL}categories`)
+    .then (response => response.json())
+    .then(data => {
+        console.table(data);
+        displayCategories(data);
+    
+    })
+    .catch(error =>{
+        console.log(error)
+    })
 }
 
-titleButton= ["Tous","Objets","Appartements","Hotel & restaurants"]
+/*function displayCategories (categories){
+    
+    const galleryCategories= document.createElement ('gallery');
+     galleryCategories.innerHTML = ''
 
-const galleryDiv = document.querySelector(".gallery");
+     categories.forEach(categories => {
+        const btnCategories= document.createElement('button');
+        btnCategories.classList.add(button);
 
-if (galleryDiv) {
+        buttonElement.textContent = category.name;
 
-for (let i = 0; i < titleButton.length; i++) {
-    const buttonElement = document.createElement ("button");
-    buttonElement.innerHTML = titleButton[i];
+        galleryCategories.appendChild(buttonElement);
+    });
+}*/
 
-galleryDiv.appendChild(buttonElement)
-}}
+function displayCategories(category){
 
+    const galleryCategories= document.createElement ('gallery');
+     galleryCategories.innerHTML = ''
+
+    const buttonElement = document.createElement('button');
+    buttonElement.textContent = category.name;
+    buttonElement.classList.add('category-button');
+
+    // Ajouter le bouton à la galerie
+    galleryDiv.appendChild(buttonElement);
+
+    const allButton = document.createElement('button');
+    allButton.textContent = "Tous";
+    btnDiv.appendChild(allButton); // Ajoute le bouton "Tous" à la div btnCategories
+}
+
+function filterWorks(category) {
+    console.log(`Filtrage par catégorie : ${category}`);
+    // Ajoutez ici le code pour filtrer les images en fonction de la catégorie sélectionnée
+}
 
 getCategories();
+
+
+
+
 
 /*const btnCategories= {
     url:"http://localhost:5678/api/categories",
     title:"Categories",
 }
 
-function getCategories (){
-    return fetch (`${API_BASE_URL}categories`)
-    .then (response => response.json())
-    .then(data => {
-        console.log(data);
-        createCategoryButtons(data);
-    })
-    .catch(error =>{
-        console.log()
-    })
-}
 
 function createCategoryButtons(categories) {
     const filtersDiv = document.querySelector('#filters');

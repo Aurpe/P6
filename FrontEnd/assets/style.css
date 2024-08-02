@@ -137,6 +137,30 @@ li:hover {
 	width: 100%;
 
 }
+.btnCategories{
+display: flex;
+align-items: center;
+flex-wrap: wrap;
+flex-direction: row;
+justify-content: space-evenly;
+}
+
+.btnCategories button{
+  border-radius:60px;
+  color:#1D6154;
+  border:1px solid #1D6154;
+  width:20%;
+  height:37px;
+  font-size:16px;
+  font-weight:bold;
+  font-family:"Syne";
+  background-color: white;
+}
+.btnCategories button:hover {
+    background-color: #1D6154;
+	color: white;
+}
+
 #contact {
 	width: 50%;
 margin: auto;
