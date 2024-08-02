@@ -11,10 +11,7 @@ function getWorks (){
         console.log()
     })
 }
-const image = {
-    url: "http://localhost:5678/api/works",
-    title: "Images"
-};
+
 
 function displayWorks(images) {
     const galleryDiv = document.querySelector('.gallery');
@@ -54,45 +51,30 @@ function getCategories (){
     })
 }
 
-/*function displayCategories (categories){
-    
-    const galleryCategories= document.createElement ('gallery');
-     galleryCategories.innerHTML = ''
 
-     categories.forEach(categories => {
-        const btnCategories= document.createElement('button');
-        btnCategories.classList.add(button);
+function displayCategories(categories) {
+    const galleryDiv = document.querySelector('.gallery');
+    galleryDiv.innerHTML = ''; 
 
-        buttonElement.textContent = category.name;
+    categories.forEach(category => {
+        const btnCategories = document.createElement('button');
+        btnCategories.classList.add('button');
+        
+        button.textContent = category.name; 
+        galleryDiv.appendChild(button);
 
-        galleryCategories.appendChild(buttonElement);
+        const allButton = document.createElement('button');
+        allButton.textContent = "Tous";
+        galleryDiv.appendChild(allButton); // Ajoute le bouton "Tous" à la div btnCategories
+
     });
-}*/
-
-function displayCategories(category){
-
-    const galleryCategories= document.createElement ('gallery');
-     galleryCategories.innerHTML = ''
-
-    const buttonElement = document.createElement('button');
-    buttonElement.textContent = category.name;
-    buttonElement.classList.add('category-button');
-
-    // Ajouter le bouton à la galerie
-    galleryDiv.appendChild(buttonElement);
-
-    const allButton = document.createElement('button');
-    allButton.textContent = "Tous";
-    btnDiv.appendChild(allButton); // Ajoute le bouton "Tous" à la div btnCategories
-}
-
-function filterWorks(category) {
-    console.log(`Filtrage par catégorie : ${category}`);
-    // Ajoutez ici le code pour filtrer les images en fonction de la catégorie sélectionnée
 }
 
 getCategories();
 
+//boucle for avec un IF/else
+
+//Pour trier tableau avec images ,créer tableau en fonction des categories et appliquer un filter sort
 
 
 
@@ -116,3 +98,17 @@ function createCategoryButtons(categories) {
     });
 }*/
 
+/*function displayCategories (categories){
+    
+    const galleryCategories= document.createElement ('gallery');
+     galleryCategories.innerHTML = ''
+
+     categories.forEach(categories => {
+        const btnCategories= document.createElement('button');
+        btnCategories.classList.add(button);
+
+        buttonElement.textContent = category.name;
+
+        galleryCategories.appendChild(buttonElement);
+    });
+}*/
