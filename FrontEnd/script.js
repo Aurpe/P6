@@ -19,7 +19,10 @@ function displayWorks(images) {
 
     images.forEach(image => {
         const galleryItem = document.createElement('figure');
+<<<<<<< HEAD
         galleryItem.classList.add('figure')
+=======
+>>>>>>> e80bd5338ff435910d55ac7e4dc586c8ad3749c4
 
         const imgElement = document.createElement('img');
         imgElement.src = image.imageUrl;
