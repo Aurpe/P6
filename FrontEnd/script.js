@@ -19,10 +19,7 @@ function displayWorks(images) {
 
     images.forEach(image => {
         const galleryItem = document.createElement('figure');
-<<<<<<< HEAD
-        galleryItem.classList.add('figure')
-=======
->>>>>>> e80bd5338ff435910d55ac7e4dc586c8ad3749c4
+        galleryItem.classList.add('figure');
 
         const imgElement = document.createElement('img');
         imgElement.src = image.imageUrl;
@@ -56,62 +53,38 @@ function getCategories (){
 
 
 function displayCategories(categories) {
-    const galleryDiv = document.querySelector('.gallery');
-    galleryDiv.innerHTML = ''; 
+    const buttonsContainer = document.querySelector('.buttonCategories');
+
+    const allButton = document.createElement('button');
+    allButton.textContent = "Tous";
+    allButton.classList.add ('filterCategory');
+    buttonsContainer.appendChild(allButton);
 
     categories.forEach(category => {
         const btnCategories = document.createElement('button');
-        btnCategories.classList.add('button');
+        btnCategories.classList.add('filterCategory');
         
-        button.textContent = category.name; 
-        galleryDiv.appendChild(button);
-
-        const allButton = document.createElement('button');
-        allButton.textContent = "Tous";
-        galleryDiv.appendChild(allButton); // Ajoute le bouton "Tous" à la div btnCategories
+        btnCategories.textContent = category.name; 
+        buttonsContainer.appendChild(btnCategories)
 
     });
 }
 
 getCategories();
 
-//boucle for avec un IF/else
-
-//Pour trier tableau avec images ,créer tableau en fonction des categories et appliquer un filter sort
 
 
+function filterWorks (){
+    const arrayFilter = displayWorks.id;    //accès au tableau Display works notamment à la catégorie ID
+    console.log(arrayFilter);
 
+    document.querySelectorAll(filterCategory) // recuperation de tous les boutons avec la classe Filter Category
+    console.log(filterCategory)
 
-/*const btnCategories= {
-    url:"http://localhost:5678/api/categories",
-    title:"Categories",
-}
-
-
-function createCategoryButtons(categories) {
-    const filtersDiv = document.querySelector('#filters');
-    filtersDiv.innerHTML = ''; 
-
-    categories.forEach(category => {
-        const button = document.createElement('button');
-        button.textContent = category.name;
-        button.dataset.category = category.name; // Utilisation de data-category pour la gestion des filtres
-        button.addEventListener('click', () => filterWorks(category.name)); // Gestionnaire d'événements pour le clic
-        filtersDiv.appendChild(button); 
-    });
-}*/
-
-/*function displayCategories (categories){
+    constFiltered = displayWorks.id (categorie => filterCategoy.id <2);
     
-    const galleryCategories= document.createElement ('gallery');
-     galleryCategories.innerHTML = ''
-
-     categories.forEach(categories => {
-        const btnCategories= document.createElement('button');
-        btnCategories.classList.add(button);
-
-        buttonElement.textContent = category.name;
-
-        galleryCategories.appendChild(buttonElement);
-    });
-}*/
+}
+1.// Seelectionner l'ID de la catégorie cliqué
+    2.// Comparer grace à filter/sort avec la category ID au tableau des works
+    3.// Quand on a reussi le filtrage, le nouveau Tableau filtered works est dans une constante
+    4.// pour le réafficher, en appel la fonction DispkayWorks en lui passant en parametre le nouveu tableau;

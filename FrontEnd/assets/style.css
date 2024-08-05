@@ -137,15 +137,16 @@ li:hover {
 	width: 100%;
 
 }
-.btnCategories{
+.buttonCategories{
 display: flex;
 align-items: center;
 flex-wrap: wrap;
 flex-direction: row;
 justify-content: space-evenly;
+margin-bottom:30px;
 }
 
-.btnCategories button{
+.filterCategory{
   border-radius:60px;
   color:#1D6154;
   border:1px solid #1D6154;
@@ -156,7 +157,7 @@ justify-content: space-evenly;
   font-family:"Syne";
   background-color: white;
 }
-.btnCategories button:hover {
+.filterCategory:hover {
     background-color: #1D6154;
 	color: white;
 }
