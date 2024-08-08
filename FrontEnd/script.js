@@ -73,14 +73,14 @@ function displayCategories(categories) {
 //getCategories();
 
 
-function filterWorks(filterCategory) {
+/*function filterWorks(filterCategory) {
     const filterByCategoryId = (categoryId) => {
         return works.filter(work => work.categoryId === categoryId);
     };
 
 }
 
-document.querySelectorAll('filterCategory',filteredWorks);
+document.querySelectorAll('filterCategory',filteredWorks);/*
 
 
 
