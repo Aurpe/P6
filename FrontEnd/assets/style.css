@@ -161,6 +161,15 @@ margin-bottom:30px;
     background-color: #1D6154;
 	color: white;
 }
+.Galeriephoto{
+	width: 630px;
+    height: 688px;
+    border-radius: 10px;
+    z-index: 9999;
+    position: absolute;
+    background-color: white;
+	display:none;
+}
 
 #contact {
 	width: 50%;

@@ -34,7 +34,7 @@ function displayWorks(images) {
     });
 }
 
-getWorks()
+//getWorks()
 
 
 
@@ -70,21 +70,53 @@ function displayCategories(categories) {
     });
 }
 
+//getCategories();
+
+
+function filterWorks(filterCategory) {
+    const filterByCategoryId = (categoryId) => {
+        return works.filter(work => work.categoryId === categoryId);
+    };
+
+}
+
+document.querySelectorAll('filterCategory',filteredWorks);
+
+
+
+/*function filterWorks() {
+    // Sélectionne les éléments avec la classe 'filterCategory'
+    const categories = document.querySelectorAll('.filterCategory');
+
+    // Fonction pour afficher les travaux filtrés
+    function displayWorks(works) {
+    
+        console.log("Displaying works:", works);
+    }
+
+    // Filtrer les catégories (ceci est un exemple de filtrage)
+    const worksFilter = Array.from(categories).filter(category => {
+        const categoryId = parseInt(category.getAttribute('data-category-id'), 10);
+        return categoryId < 2;
+    });
+
+    // Affiche les travaux filtrés
+    displayWorks(worksFilter);
+}/*
+
+
+/*function filterWorks(categoryId) {
+    let filteredWorks;
+    if (categoryId) {
+        filteredWorks = allWorks.filter(work => work.categoryId === categoryId);
+    } else {
+        filteredWorks = allWorks; // Si categoryId est null, afficher toutes les œuvres
+    }
+    displayWorks(filteredWorks);*/
+
+getWorks();
 getCategories();
 
 
+       
 
-function filterWorks (){
-    const arrayFilter = displayWorks.id;    //accès au tableau Display works notamment à la catégorie ID
-    console.log(arrayFilter);
-
-    document.querySelectorAll(filterCategory) // recuperation de tous les boutons avec la classe Filter Category
-    console.log(filterCategory)
-
-    constFiltered = displayWorks.id (categorie => filterCategoy.id <2);
-    
-}
-1.// Seelectionner l'ID de la catégorie cliqué
-    2.// Comparer grace à filter/sort avec la category ID au tableau des works
-    3.// Quand on a reussi le filtrage, le nouveau Tableau filtered works est dans une constante
-    4.// pour le réafficher, en appel la fonction DispkayWorks en lui passant en parametre le nouveu tableau;
