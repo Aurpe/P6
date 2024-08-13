@@ -47,6 +47,15 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
+
+.modeEdition{
+	background-color: black;
+    height: 59px;
+    color: white;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
 body {
 	max-width: 1140px;
 	margin:auto;

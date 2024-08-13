@@ -95,6 +95,30 @@ getCategories();
 // au clic sur logout -> remove le token du localStorage.
 
 
+function checkUserStatus () {
+   const token = localStorage.getItem("token");
+   if (token) {
+     document.querySelector ('.modeEdition');
+   }
+   else
+   displayCategories= display.none;
+   
+}
+
+/*function checkUserStatus() {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+        // Si un token est présent, affiche l'élément avec la classe 'modeEdition'
+        document.querySelector('.modeEdition').style.display = 'block';
+    } else {
+        // Si aucun token n'est présent, masque les catégories (assumant qu'il y a un élément avec la classe 'displayCategories')
+        const displayCategories = document.querySelector('.displayCategories');
+        if (displayCategories) {
+            displayCategories.style.display = 'none';
+        }
+    }
+}*/
 
 
 
