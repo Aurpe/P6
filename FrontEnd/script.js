@@ -57,65 +57,47 @@ function displayCategories(categories) {
 
     const allButton = document.createElement('button');
     allButton.textContent = "Tous";
-    allButton.classList.add ('filterCategory');
+    allButton.classList.add('filterCategory');
     buttonsContainer.appendChild(allButton);
-
+    // Faire en sorte que si on clic sur le button "tous", on réaffiche le tableau complet
     categories.forEach(category => {
         const btnCategories = document.createElement('button');
         btnCategories.classList.add('filterCategory');
-        
-        btnCategories.textContent = category.name; 
-        buttonsContainer.appendChild(btnCategories)
 
+        btnCategories.textContent = category.name;
+        buttonsContainer.appendChild(btnCategories);
+        btnCategories.addEventListener('click', function() {
+            getWorks().then(works => {
+                const filteredWorks = filterWorks(category.id, works);
+                console.log(filteredWorks)
+                displayWorks(filteredWorks)
+            })
+        })
     });
 }
 
-//getCategories();
-
-
-/*function filterWorks(filterCategory) {
-    const filterByCategoryId = (categoryId) => {
-        return works.filter(work => work.categoryId === categoryId);
-    };
-
+function filterWorks(categoryId, works) {
+    return works.filter(work => work.categoryId === categoryId)
 }
-
-document.querySelectorAll('filterCategory',filteredWorks);/*
-
-
-
-/*function filterWorks() {
-    // Sélectionne les éléments avec la classe 'filterCategory'
-    const categories = document.querySelectorAll('.filterCategory');
-
-    // Fonction pour afficher les travaux filtrés
-    function displayWorks(works) {
-    
-        console.log("Displaying works:", works);
-    }
-
-    // Filtrer les catégories (ceci est un exemple de filtrage)
-    const worksFilter = Array.from(categories).filter(category => {
-        const categoryId = parseInt(category.getAttribute('data-category-id'), 10);
-        return categoryId < 2;
-    });
-
-    // Affiche les travaux filtrés
-    displayWorks(worksFilter);
-}/*
-
-
-/*function filterWorks(categoryId) {
-    let filteredWorks;
-    if (categoryId) {
-        filteredWorks = allWorks.filter(work => work.categoryId === categoryId);
-    } else {
-        filteredWorks = allWorks; // Si categoryId est null, afficher toutes les œuvres
-    }
-    displayWorks(filteredWorks);*/
 
 getWorks();
 getCategories();
+
+// Préparer en HTML ET CSS le mode admin
+// -> si ok, display none le mode admin
+
+// function checkUserStatus -> vérifier si il y a un token dans le LS,
+// Si oui -> afficher le mode admin + display none les filtres.
+
+// modales en HTML CSS.
+
+// bonus : mettre un bouton logout a la place de login dans le header si on est connecté.
+// au clic sur logout -> remove le token du localStorage.
+
+
+
+
+
 
 
        

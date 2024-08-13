@@ -1,17 +1,15 @@
-document.getElementById('loginForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Empêche le formulaire de se soumettre normalement
-
+function login() {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    //données à envoyer
+    // données à envoyer
     const loginData = {
         email: email,
         password: password
     };
 
     // Envoi de la requête POST à l'API
-    fetch('http://localhost:5678/api/', {
+    fetch('http://localhost:5678/api/users/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -25,18 +23,17 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         return response.json();
     })
     .then(data => {
-        // Traitez les données de réponse ici, par exemple en redirigeant l'utilisateur
-        console.log('Connexion réussie:', data);
-        // Vous pouvez rediriger l'utilisateur, stocker le token, etc.
-     
+        localStorage.setItem('token', data.token);
+        window.location.href = 'index.html'
     })
     .catch(error => {
         console.error('Erreur:', error);
         alert('Erreur de connexion. Veuillez vérifier vos informations.');
     });
+}
+
+document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    login()
 });
 
-/*{
-    "userId": 1,
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4"
-  }*/
