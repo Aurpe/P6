@@ -37,3 +37,20 @@ document.querySelector('form').addEventListener('submit', function(event) {
     login()
 });
 
+function checkUserStatus () {
+    const token = localStorage.getItem("token");
+    let message = "mode édition activé";
+
+
+    if (token) {
+      const editionMode= document.querySelector ('.modeEdition');
+    if (editionMode){
+        editionMode.style.display = 'block';
+    }
+      return message 
+    else
+    displayCategories.display.none;
+    }
+    
+ }
+checkUserStatus();
