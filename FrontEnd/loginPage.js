@@ -23,8 +23,13 @@ function login() {
         return response.json();
     })
     .then(data => {
+
+        const token= data.token;
+        console.log(token)
+
         localStorage.setItem('token', data.token);
         window.location.href = 'index.html'
+        
     })
     .catch(error => {
         console.error('Erreur:', error);
@@ -37,20 +42,42 @@ document.querySelector('form').addEventListener('submit', function(event) {
     login()
 });
 
-function checkUserStatus () {
-    const token = localStorage.getItem("token");
-    let message = "mode édition activé";
+function checkUserStatus (){
+    localStorage.getItem;('token', data.token);
+
+    if (data.token) {
+        // Afficher le mode édition
+        let editionMode = document.querySelector('.modeEdition');
+        if (editionMode) {
+            editionMode.style.display = 'block';
+        }
+        
+        // Masquer les catégories
+        let displayCategories = document.querySelector('buttonCategories');
+        if (displayCategories) {
+            displayCategories.style.display = 'none';
+        }
+        
+        // Afficher le message d'activation
+        console.log(message);
+    } else {
+        // Masquer le mode édition
+        let editionMode = document.querySelector('.modeEdition');
+        if (editionMode) {
+            editionMode.style.display = 'none';
+        }
+        
+        // Afficher les catégories
+        let displayCategories = document.querySelector('.buttonCategories');
+        if (displayCategories) {
+            displayCategories.style.display = 'block';
+        }
+        
+        // Afficher un message indiquant que le mode édition n'est pas activé
+        console.log("Mode édition désactivé");
+    }
+}
 
 
-    if (token) {
-      const editionMode= document.querySelector ('.modeEdition');
-    if (editionMode){
-        editionMode.style.display = 'block';
-    }
-      return message 
-    else
-    displayCategories.display.none;
-    }
-    
- }
+// Appeler la fonction pour vérifier le statut de l'utilisateur
 checkUserStatus();

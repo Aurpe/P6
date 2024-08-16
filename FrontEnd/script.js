@@ -94,44 +94,25 @@ getCategories();
 // bonus : mettre un bouton logout a la place de login dans le header si on est connecté.
 // au clic sur logout -> remove le token du localStorage. 
 
+function modale1 (){
+  let Modale=  document.querySelector('.modaleGalerie');
+  let modaleWrapper= document.querySelector ('.modalwrap')
+  // Supposons que displayWorks retourne un tableau d'éléments HTML représentant les images
+  let works = displayWorks();
 
-   
-
-if (token) {
-    // Afficher le mode édition
-    let editionMode = document.querySelector('.modeEdition');
-    if (editionMode) {
-        editionMode.style.display = 'block';
-    }
-    
-    // Masquer les catégories
-    let displayCategories = document.querySelector('.displayCategories');
-    if (displayCategories) {
-        displayCategories.style.display = 'none';
-    }
-    
-    // Afficher le message d'activation
-    console.log(message);
-} else {
-    // Masquer le mode édition
-    let editionMode = document.querySelector('.modeEdition');
-    if (editionMode) {
-        editionMode.style.display = 'none';
-    }
-    
-    // Afficher les catégories
-    let displayCategories = document.querySelector('.displayCategories');
-    if (displayCategories) {
-        displayCategories.style.display = 'block';
-    }
-    
-    // Afficher un message indiquant que le mode édition n'est pas activé
-    console.log("Mode édition désactivé");
+  
+  // Ajouter chaque image à photoModale
+  works.forEach(work => {
+    photoModale.appendChild(works);
+  });
 }
 
 
-// Appeler la fonction pour vérifier le statut de l'utilisateur
-checkUserStatus();
+  
+
+
+
+
 
 
 
