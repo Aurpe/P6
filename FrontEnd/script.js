@@ -96,16 +96,15 @@ getCategories();
 
 function modale1 (){
   let Modale=  document.querySelector('.modaleGalerie');
-  let modaleWrapper= document.querySelector ('.modalwrap')
-  // Supposons que displayWorks retourne un tableau d'éléments HTML représentant les images
   let works = displayWorks();
 
-  
   // Ajouter chaque image à photoModale
   works.forEach(work => {
     photoModale.appendChild(works);
   });
 }
+
+
 
 
   

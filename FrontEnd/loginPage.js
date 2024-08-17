@@ -28,6 +28,10 @@ function login() {
         console.log(token)
 
         localStorage.setItem('token', data.token);
+
+        // Appeler checkUserStatus pour afficher le mode édition
+        checkUserStatus();
+        
         window.location.href = 'index.html'
         
     })
@@ -42,42 +46,44 @@ document.querySelector('form').addEventListener('submit', function(event) {
     login()
 });
 
-function checkUserStatus (){
-    localStorage.getItem;('token', data.token);
 
-    if (data.token) {
+function checkUserStatus() {
+    // Récupérer le token depuis le localStorage
+    const token = localStorage.getItem('token');
+
+    if (token) {
         // Afficher le mode édition
-        let editionMode = document.querySelector('.modeEdition');
+        const editionMode = document.querySelector('.modeEdition');
         if (editionMode) {
             editionMode.style.display = 'block';
         }
         
         // Masquer les catégories
-        let displayCategories = document.querySelector('buttonCategories');
-        if (displayCategories) {
-            displayCategories.style.display = 'none';
+        const categoriesContainer = document.querySelector('.buttonCategories');
+        if (categoriesContainer) {
+            categoriesContainer.style.display = 'none';
         }
         
         // Afficher le message d'activation
-        console.log(message);
+        console.log("Mode Edition connecté");
     } else {
         // Masquer le mode édition
-        let editionMode = document.querySelector('.modeEdition');
+        const editionMode = document.querySelector('.modeEdition');
         if (editionMode) {
             editionMode.style.display = 'none';
         }
         
         // Afficher les catégories
-        let displayCategories = document.querySelector('.buttonCategories');
-        if (displayCategories) {
-            displayCategories.style.display = 'block';
+        const categoriesContainer = document.querySelector('.buttonCategories');
+        if (categoriesContainer) {
+            categoriesContainer.style.display = 'block';
         }
         
         // Afficher un message indiquant que le mode édition n'est pas activé
-        console.log("Mode édition désactivé");
+        console.log("Mode Edition déconnecté");
     }
 }
 
-
 // Appeler la fonction pour vérifier le statut de l'utilisateur
 checkUserStatus();
+

@@ -52,14 +52,29 @@ table {
 	background-color: black;
     height: 59px;
     color: white;
-	display: flex;
+    display: flex;
     align-items: center;
     justify-content: center;
-	display:none;
+    display: none;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+	
 }
 
 .fa-regular .fa-pen-to-square{
 color:white;
+}
+
+.projet {
+	display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.modeModify{
+	display:none;
 }
 body {
 	max-width: 1140px;
@@ -282,3 +297,97 @@ footer nav ul {
 	display: block;
 	margin-bottom: 5px;
   }
+  .displaymodal {
+	border-radius: 10px;
+	display: none;
+    position: fixed;
+    z-index: 1;
+    left: 30%;
+    top: 50%;
+    width: 630px;
+    height: 668px;
+    overflow: auto;
+    background-color: white;
+     
+}
+.submitBtn{
+	font-size: 16px;
+    font-weight: bold;
+    font-family: "Syne";
+    border-radius: 60px;
+    color: #1D6154;
+    border: 1px solid #1D6154;
+    width: 20%;
+    height: 36px;
+    margin-top: 30px;
+}
+.submitBtn:hover {
+    background-color: #1D6154;
+	color: white;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+}
+
+.close {
+    color: black;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+.gallery img {
+    max-width: 100px;
+    height: auto;
+}
+
+#loginForm {
+	width: 50%;
+margin: auto;
+}
+#loginForm > * {
+	text-align: center;
+
+}
+#loginForm h2{
+	margin-bottom: 20px;
+}
+#loginForm form {
+	text-align: left;
+	margin-top:30px;
+	display: flex;
+	flex-direction: column;
+}
+
+#loginForm input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#loginForm label {
+	margin: 2em 0 1em 0;
+}
+#loginForm textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
