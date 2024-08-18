@@ -6,6 +6,7 @@ function getWorks (){
     .then(data => {
         console.table(data);
         displayWorks(data);
+        displayWorksInModale(data)
     })
     .catch(error =>{
         console.log()
@@ -34,9 +35,37 @@ function displayWorks(images) {
     });
 }
 
+function displayWorksInModale(images) {
+    const galleryDiv = document.querySelector('.galleryInModale');
+    galleryDiv.innerHTML = ''
+
+    images.forEach(image => {
+        const galleryItem = document.createElement('div');
+        galleryItem.classList.add('workInModale');
+
+        const imgElement = document.createElement('img');
+        imgElement.src = image.imageUrl;
+        imgElement.alt = image.title;
+
+        const trash = document.createElement('i');
+        trash.classList.add('fa-solid');
+        trash.classList.add('fa-trash');
+        trash.id = image.id;
+
+        galleryItem.appendChild(imgElement);
+        galleryItem.appendChild(trash);
+        galleryDiv.appendChild(galleryItem);
+    });
+}
+
+// fetch delete : 
+// on prend l'id de l'élément cliqué, et on le supprime.
+// elementcliqué.parentNode.remove
+
 //getWorks()
 
-
+// Post Work : 
+// au lieu de mettre l'objet dans une constante et lui envoyer l'objet, on le met dans un FormData
 
 function getCategories (){
     return fetch (`${API_BASE_URL}categories`)
@@ -94,16 +123,56 @@ getCategories();
 // bonus : mettre un bouton logout a la place de login dans le header si on est connecté.
 // au clic sur logout -> remove le token du localStorage. 
 
-function modale1 (){
-  let Modale=  document.querySelector('.modaleGalerie');
-  let works = displayWorks();
 
-  // Ajouter chaque image à photoModale
-  works.forEach(work => {
-    photoModale.appendChild(works);
-  });
+
+function checkUserStatus() {
+    // Récupérer le token depuis le localStorage
+    const token = localStorage.getItem('token');
+
+    if (token) {
+        // Afficher le mode édition
+        const editionMode = document.querySelector('.modeEdition');
+        const editionButton = document.querySelector('.modeModify');
+        if (editionMode) {
+            editionMode.style.display = 'block';
+            editionButton.style.display = 'block';
+        }
+        
+        // Masquer les catégories
+        const categoriesContainer = document.querySelector('.buttonCategories');
+        if (categoriesContainer) {
+            categoriesContainer.style.display = 'none';
+        }
+        
+        // Afficher le message d'activation
+        console.log("Mode Edition connecté");
+    } else {
+        // Masquer le mode édition
+        const editionMode = document.querySelector('.modeEdition');
+        if (editionMode) {
+            editionMode.style.display = 'none';
+        }
+        
+        // Afficher les catégories
+        const categoriesContainer = document.querySelector('.buttonCategories');
+        if (categoriesContainer) {
+            categoriesContainer.style.display = 'block';
+        }
+        
+        // Afficher un message indiquant que le mode édition n'est pas activé
+        console.log("Mode Edition déconnecté");
+    }
 }
 
+// Appeler la fonction pour vérifier le statut de l'utilisateur
+checkUserStatus();
+
+const modifier = document.querySelector('.modifier');
+modifier.addEventListener('click', function() {
+    const modaleGalerie = document.querySelector('.displaymodal');
+    modaleGalerie.style.display = "block"
+
+});
 
 
 
