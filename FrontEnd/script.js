@@ -151,58 +151,90 @@ getCategories();
 // bonus : mettre un bouton logout a la place de login dans le header si on est connecté.
 // au clic sur logout -> remove le token du localStorage. 
 
-
-
 function checkUserStatus() {
     // Récupérer le token depuis le localStorage
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
 
     if (token) {
         // Afficher le mode édition
-        const editionMode = document.querySelector('.modeEdition');
-        const editionButton = document.querySelector('.modeModify');
+        const editionMode = document.querySelector(".modeEdition");
+        const editionButton = document.querySelector(".modeModify");
         if (editionMode) {
-            editionMode.style.display = 'block';
-            editionButton.style.display = 'block';
+            editionMode.style.display = "block";
+            editionButton.style.display = "block";
         }
-        
+
+        const penIcon = document.querySelector(".fa-pen-to-square");
+        if (penIcon) {
+            penIcon.addEventListener("click", openModal);
+        }
+
         // Masquer les catégories
-        const categoriesContainer = document.querySelector('.buttonCategories');
+        const categoriesContainer = document.querySelector(".buttonCategories");
         if (categoriesContainer) {
-            categoriesContainer.style.display = 'none';
+            categoriesContainer.style.display = "none";
         }
-        
+
         // Afficher le message d'activation
         console.log("Mode Edition connecté");
     } else {
         // Masquer le mode édition
-        const editionMode = document.querySelector('.modeEdition');
+        const editionMode = document.querySelector(".modeEdition");
         if (editionMode) {
-            editionMode.style.display = 'none';
+            editionMode.style.display = "none";
         }
-        
+
         // Afficher les catégories
-        const categoriesContainer = document.querySelector('.buttonCategories');
+        const categoriesContainer = document.querySelector(".buttonCategories");
         if (categoriesContainer) {
-            categoriesContainer.style.display = 'block';
+            categoriesContainer.style.display = "block";
         }
-        
+
         // Afficher un message indiquant que le mode édition n'est pas activé
         console.log("Mode Edition déconnecté");
     }
 }
-
-// Appeler la fonction pour vérifier le statut de l'utilisateur
-checkUserStatus();
-
-
 
 const modifier = document.querySelector('.modifier');
 modifier.addEventListener('click', function() {
     const modaleGalerie = document.querySelector('.displaymodal');
     modaleGalerie.style.display = "block"
 
-}); 
+});
+
+// Appeler la fonction pour vérifier le statut de l'utilisateur
+checkUserStatus();
+
+function openModal() {
+    const modal = document.getElementById('myModal');
+    if (modal) {
+        modal.style.display = 'block';
+    }
+}
+
+function closeModal() {
+    const modal = document.getElementById('myModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+const closeBtn = document.querySelector('.close');
+if (closeBtn) {
+    closeBtn.addEventListener('click', closeModal);
+}
+
+// Fermer le modal quand on clique en dehors du contenu du modal
+window.addEventListener('click', function(event) {
+    const modal = document.getElementById('myModal');
+    if (event.target == modal) {
+        closeModal();
+    }
+});
+
+
+
+
 
 
 
