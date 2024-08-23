@@ -205,9 +205,36 @@ modifier.addEventListener('click', function() {
 
 });
 
-// JavaScript pour gérer le modal et la soumission du formulaire
+function openModal() {
+    const modal = document.getElementById('myModal');
+    if (modal) {
+        modal.style.display = 'block';
+    }
+}
 
-// Récupérer les éléments du modal, du formulaire, et du bouton de fermeture
+function closeModal() {
+    const modal = document.getElementById('myModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+const closeBtn = document.querySelector('.close');
+if (closeBtn) {
+    closeBtn.addEventListener('click', closeModal);
+}
+
+// Fermer le modal quand on clique en dehors du contenu du modal
+window.addEventListener('click', function(event) {
+    const modal = document.getElementById('myModal');
+    if (event.target == modal) {
+        closeModal();
+    }
+});
+
+
+
+/* Récupérer les éléments du modal, du formulaire, et du bouton de fermeture
 const modal = document.getElementById("myModal");
 const closeButton = document.querySelector(".close");
 const formElem = document.getElementById("photoForm");
@@ -222,17 +249,7 @@ function fermerModal() {
     modal.style.display = "none";
 }
 
-// Fermer le modal lorsque l'utilisateur clique sur le bouton de fermeture
-closeButton.addEventListener("click", fermerModal);
-
-// Fermer le modal lorsque l'utilisateur clique n'importe où en dehors du modal
-window.addEventListener("click", function(event) {
-    if (event.target == modal) {
-        fermerModal();
-    }
-});
-
-// Fonction pour gérer la soumission du formulaire
+//Fonction pour gérer la soumission du formulaire
 async function postWork(event) {
     event.preventDefault(); // Empêcher le comportement par défaut de la soumission du formulaire
 
@@ -264,6 +281,7 @@ async function postWork(event) {
 
 // Attacher la fonction postWork à l'événement de soumission du formulaire
 formElem.addEventListener("submit", postWork);
+*/
 
 
    
