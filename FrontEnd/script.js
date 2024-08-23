@@ -51,21 +51,49 @@ function displayWorksInModale(images) {
         trash.classList.add('fa-solid');
         trash.classList.add('fa-trash');
         trash.id = image.id;
+        console.log(trash.id);
+
+
+       trash.addEventListener('click', () => deleteWork(image.id));
 
         galleryItem.appendChild(imgElement);
         galleryItem.appendChild(trash);
         galleryDiv.appendChild(galleryItem);
     });
+
+
 }
+async function deleteWork(id) {
+    event.preventDefault();
+    const token = localStorage.getItem("token");
+    try {
+        const response = await fetch(`${API_BASE_URL}works/${id}`, {
+            method: "DELETE",
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        if (response.ok) {
+            const elementToRemove = document.getElementById(id);
+            if (elementToRemove) {
+                elementToRemove.parentNode.remove();
+            }
+            // Rafraîchir l'affichage des works
+            getWorks();
+        } else {
+            console.log("La suppression a échoué");
+        }
+    } catch (error) {
+        console.log("Erreur lors de la suppression :", error);
+    }
+}
+
 
 // fetch delete : 
 // on prend l'id de l'élément cliqué, et on le supprime.
 // elementcliqué.parentNode.remove
 
-//getWorks()
-
-// Post Work : 
-// au lieu de mettre l'objet dans une constante et lui envoyer l'objet, on le met dans un FormData
 
 function getCategories (){
     return fetch (`${API_BASE_URL}categories`)
@@ -167,12 +195,18 @@ function checkUserStatus() {
 // Appeler la fonction pour vérifier le statut de l'utilisateur
 checkUserStatus();
 
+
+
 const modifier = document.querySelector('.modifier');
 modifier.addEventListener('click', function() {
     const modaleGalerie = document.querySelector('.displaymodal');
     modaleGalerie.style.display = "block"
 
-});
+}); 
+
+
+
+
 
 
 
