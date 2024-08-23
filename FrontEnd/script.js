@@ -195,6 +195,9 @@ function checkUserStatus() {
     }
 }
 
+// Appeler la fonction pour vérifier le statut de l'utilisateur
+checkUserStatus();
+
 const modifier = document.querySelector('.modifier');
 modifier.addEventListener('click', function() {
     const modaleGalerie = document.querySelector('.displaymodal');
@@ -202,36 +205,69 @@ modifier.addEventListener('click', function() {
 
 });
 
-// Appeler la fonction pour vérifier le statut de l'utilisateur
-checkUserStatus();
+// JavaScript pour gérer le modal et la soumission du formulaire
 
-function openModal() {
-    const modal = document.getElementById('myModal');
-    if (modal) {
-        modal.style.display = 'block';
-    }
+// Récupérer les éléments du modal, du formulaire, et du bouton de fermeture
+const modal = document.getElementById("myModal");
+const closeButton = document.querySelector(".close");
+const formElem = document.getElementById("photoForm");
+
+// Fonction pour ouvrir le modal (cela peut être déclenché par un clic de bouton ou un autre événement)
+function ouvrirModal() {
+    modal.style.display = "block";
 }
 
-function closeModal() {
-    const modal = document.getElementById('myModal');
-    if (modal) {
-        modal.style.display = 'none';
-    }
+// Fonction pour fermer le modal
+function fermerModal() {
+    modal.style.display = "none";
 }
 
-const closeBtn = document.querySelector('.close');
-if (closeBtn) {
-    closeBtn.addEventListener('click', closeModal);
-}
+// Fermer le modal lorsque l'utilisateur clique sur le bouton de fermeture
+closeButton.addEventListener("click", fermerModal);
 
-// Fermer le modal quand on clique en dehors du contenu du modal
-window.addEventListener('click', function(event) {
-    const modal = document.getElementById('myModal');
+// Fermer le modal lorsque l'utilisateur clique n'importe où en dehors du modal
+window.addEventListener("click", function(event) {
     if (event.target == modal) {
-        closeModal();
+        fermerModal();
     }
 });
 
+// Fonction pour gérer la soumission du formulaire
+async function postWork(event) {
+    event.preventDefault(); // Empêcher le comportement par défaut de la soumission du formulaire
+
+    const formData = new FormData(formElem); // Créer un objet FormData avec les données du formulaire
+
+    try {
+        // Envoyer la requête POST avec les données du formulaire
+        let response = await fetch('http://localhost:5678/api/works', {
+            method: 'POST',
+            body: formData
+        });
+
+        // Analyser la réponse JSON
+        let result = await response.json();
+
+        // Gérer la réponse (par exemple, afficher une alerte avec le message du résultat)
+        if (response.ok) {
+            alert("Photo ajoutée avec succès : " + result.message);
+            fermerModal(); // Fermer le modal après la soumission réussie
+            formElem.reset(); // Réinitialiser les champs du formulaire
+        } else {
+            alert("Erreur : " + result.message);
+        }
+    } catch (error) {
+        console.error("Une erreur s'est produite lors de la requête :", error);
+        alert("Une erreur est survenue lors du téléchargement de la photo.");
+    }
+}
+
+// Attacher la fonction postWork à l'événement de soumission du formulaire
+formElem.addEventListener("submit", postWork);
+
+
+   
+   
 
 
 
