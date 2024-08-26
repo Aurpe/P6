@@ -7,6 +7,7 @@ function getWorks (){
         console.table(data);
         displayWorks(data);
         displayWorksInModale(data)
+        return data;
     })
     .catch(error =>{
         console.log()
@@ -111,12 +112,18 @@ function getCategories (){
 
 function displayCategories(categories) {
     const buttonsContainer = document.querySelector('.buttonCategories');
-
+    console.log(categories)
     const allButton = document.createElement('button');
     allButton.textContent = "Tous";
     allButton.classList.add('filterCategory');
     buttonsContainer.appendChild(allButton);
     // Faire en sorte que si on clic sur le button "tous", on réaffiche le tableau complet
+    allButton.addEventListener('click', function() {
+        getWorks().then(works => {
+            displayWorks(works);
+        });
+    });
+
     categories.forEach(category => {
         const btnCategories = document.createElement('button');
         btnCategories.classList.add('filterCategory');
@@ -233,6 +240,60 @@ window.addEventListener('click', function(event) {
 });
 
 
+/*Récupérer les éléments du modal, du formulaire, et du bouton de fermeture
+const modal = document.getElementById("myModal");
+const closeButton = document.querySelector(".close");
+const formElem = document.getElementById("photoForm");
+
+// Fonction pour ouvrir le modal (cela peut être déclenché par un clic de bouton ou un autre événement)
+function ouvrirModal() {
+    modal.style.display = "block";
+}
+
+// Fonction pour fermer le modal
+function fermerModal() {
+    modal.style.display = "none";
+}*/
+
+//Fonction pour gérer la soumission du formulaire
+async function postWork(event) {
+    event.preventDefault(); // Empêcher le comportement par défaut de la soumission du formulaire
+
+    const image = document.querySelector('#photoInput').files[0];
+    const title = document.querySelector('#titleInput').value;
+    const category = document.querySelector('#categorySelect').value;
+
+    const formData = new FormData(); // Créer un objet FormData avec les données du formulaire
+
+    try {
+        // Envoyer la requête POST avec les données du formulaire
+        let response = await fetch('http://localhost:5678/api/works', {
+            method: 'POST',
+            headers: {
+                'Accept': "application/json",
+                'Authorization': `Bearer ${token}`
+            },
+            body: formData
+        });
+    
+        // Déclarer le contenu de l'API à l'intérieur
+        let result = await response.json();
+    
+        // Gérer la réponse (par exemple, afficher une alerte avec le message du résultat)
+        if (response.ok) {
+            alert("Photo ajoutée avec succès : " + result.message);
+            fermerModal(); // Fermer le modal après la soumission réussie
+        } else {
+            alert("Erreur : " + result.message);
+        }
+    } catch (error) {
+        console.error("Une erreur s'est produite lors de la requête :", error);
+        alert("Une erreur est survenue lors du téléchargement de la photo.");
+    }
+
+const clikHere= document.querySelector('CESTICI')
+clikHere.addEventListener("clik", postWork);
+
 
 /* Récupérer les éléments du modal, du formulaire, et du bouton de fermeture
 const modal = document.getElementById("myModal");
@@ -249,40 +310,11 @@ function fermerModal() {
     modal.style.display = "none";
 }
 
-//Fonction pour gérer la soumission du formulaire
-async function postWork(event) {
-    event.preventDefault(); // Empêcher le comportement par défaut de la soumission du formulaire
 
-    const formData = new FormData(formElem); // Créer un objet FormData avec les données du formulaire
-
-    try {
-        // Envoyer la requête POST avec les données du formulaire
-        let response = await fetch('http://localhost:5678/api/works', {
-            method: 'POST',
-            body: formData
-        });
-
-        // Analyser la réponse JSON
-        let result = await response.json();
-
-        // Gérer la réponse (par exemple, afficher une alerte avec le message du résultat)
-        if (response.ok) {
-            alert("Photo ajoutée avec succès : " + result.message);
-            fermerModal(); // Fermer le modal après la soumission réussie
-            formElem.reset(); // Réinitialiser les champs du formulaire
-        } else {
-            alert("Erreur : " + result.message);
-        }
-    } catch (error) {
-        console.error("Une erreur s'est produite lors de la requête :", error);
-        alert("Une erreur est survenue lors du téléchargement de la photo.");
-    }
-}
 
 // Attacher la fonction postWork à l'événement de soumission du formulaire
 formElem.addEventListener("submit", postWork);
 */
-
 
    
    
