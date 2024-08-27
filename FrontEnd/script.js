@@ -112,18 +112,14 @@ function getCategories (){
 
 function displayCategories(categories) {
     const buttonsContainer = document.querySelector('.buttonCategories');
-    console.log(categories)
+   
+
     const allButton = document.createElement('button');
     allButton.textContent = "Tous";
     allButton.classList.add('filterCategory');
     buttonsContainer.appendChild(allButton);
     // Faire en sorte que si on clic sur le button "tous", on réaffiche le tableau complet
-    allButton.addEventListener('click', function() {
-        getWorks().then(works => {
-            displayWorks(works);
-        });
-    });
-
+   
     categories.forEach(category => {
         const btnCategories = document.createElement('button');
         btnCategories.classList.add('filterCategory');
@@ -132,7 +128,9 @@ function displayCategories(categories) {
         buttonsContainer.appendChild(btnCategories);
         btnCategories.addEventListener('click', function() {
             getWorks().then(works => {
+                console.log ('ICI'+works)
                 const filteredWorks = filterWorks(category.id, works);
+
                 console.log(filteredWorks)
                 displayWorks(filteredWorks)
             })
@@ -158,6 +156,7 @@ getCategories();
 // bonus : mettre un bouton logout a la place de login dans le header si on est connecté.
 // au clic sur logout -> remove le token du localStorage. 
 
+
 function checkUserStatus() {
     // Récupérer le token depuis le localStorage
     const token = localStorage.getItem("token");
@@ -166,14 +165,14 @@ function checkUserStatus() {
         // Afficher le mode édition
         const editionMode = document.querySelector(".modeEdition");
         const editionButton = document.querySelector(".modeModify");
+        const Deconnexion = document.querySelector (".logout");
+        const Connexion= document.querySelector(".login");
+
         if (editionMode) {
             editionMode.style.display = "block";
             editionButton.style.display = "block";
-        }
-
-        const penIcon = document.querySelector(".fa-pen-to-square");
-        if (penIcon) {
-            penIcon.addEventListener("click", openModal);
+            Deconnexion.style.display= "block";
+            Connexion.style.display = "none";
         }
 
         // Masquer les catégories
@@ -182,6 +181,7 @@ function checkUserStatus() {
             categoriesContainer.style.display = "none";
         }
 
+
         // Afficher le message d'activation
         console.log("Mode Edition connecté");
     } else {
@@ -189,6 +189,7 @@ function checkUserStatus() {
         const editionMode = document.querySelector(".modeEdition");
         if (editionMode) {
             editionMode.style.display = "none";
+            Deconnexion.style.display= "none";
         }
 
         // Afficher les catégories
@@ -200,35 +201,16 @@ function checkUserStatus() {
         // Afficher un message indiquant que le mode édition n'est pas activé
         console.log("Mode Edition déconnecté");
     }
-}
 
-// Appeler la fonction pour vérifier le statut de l'utilisateur
-checkUserStatus();
-
-const modifier = document.querySelector('.modifier');
-modifier.addEventListener('click', function() {
-    const modaleGalerie = document.querySelector('.displaymodal');
-    modaleGalerie.style.display = "block"
-
-});
-
-function openModal() {
-    const modal = document.getElementById('myModal');
-    if (modal) {
-        modal.style.display = 'block';
+    // Ajout de l'événement de déconnexion
+    if (deconnexion) {
+        deconnexion.addEventListener('click', function() {
+            localStorage.removeItem("token");  // Supprimer le token
+            checkUserStatus();  // Rafraîchir l'état de l'interface
+            console.log("Déconnexion effectuée");
+        });
     }
-}
 
-function closeModal() {
-    const modal = document.getElementById('myModal');
-    if (modal) {
-        modal.style.display = 'none';
-    }
-}
-
-const closeBtn = document.querySelector('.close');
-if (closeBtn) {
-    closeBtn.addEventListener('click', closeModal);
 }
 
 // Fermer le modal quand on clique en dehors du contenu du modal
@@ -274,6 +256,9 @@ async function postWork(event) {
                 'Authorization': `Bearer ${token}`
             },
             body: formData
+            
+
+
         });
     
         // Déclarer le contenu de l'API à l'intérieur
@@ -290,9 +275,10 @@ async function postWork(event) {
         console.error("Une erreur s'est produite lors de la requête :", error);
         alert("Une erreur est survenue lors du téléchargement de la photo.");
     }
+}
 
-const clikHere= document.querySelector('CESTICI')
-clikHere.addEventListener("clik", postWork);
+const clikHere= document.querySelector('#CESTICI')
+clikHere.addEventListener("click", postWork);
 
 
 /* Récupérer les éléments du modal, du formulaire, et du bouton de fermeture

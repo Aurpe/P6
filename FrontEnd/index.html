@@ -71,6 +71,38 @@
 				<button id="submitBtn">Ajouter une photo</button>
 			</div>
 		</div>
+
+		  <div id="myModal" class="modal">
+			<div class="modal-content">
+			  <span class="close">&times;</span>
+			  <h2>Ajout photo</h2>
+			  <form id="photoForm">
+				<div class="form-group">
+				  <div class="grayRectangle">
+					<i class="fa-regular fa-image"></i>
+					<input type="file" id="photoInput" accept="image/*" required style="display: none;">
+				  <button type="button" id="customPhotoButton" class="photo-button">+ Ajouter photo</button>
+				</div>
+				  
+				<div class="form-group">
+				  <label for="photoTitle">Titre de la photo :</label>
+				  <input type="text" id="photoTitle" name="photoTitle" required>
+				</div>
+				<div class="form-group">
+				  <label for="categorySelect">Choisir une catégorie :</label>
+				  <select id="categorySelect" required>
+					<option value="">Sélectionner une catégorie</option>
+					<option value="1">Objets</option>
+					<option value="2">Appartements</option>
+					<option value="3">Hôtels & restaurants</option>
+				  </select>
+				</div>
+				<button type="submit" id="CESTICI">Valider</button>
+			  </form>
+			</div>
+		  </div>
+		  
+	
 		
 		<div id="myModal" class="modal">
 			<div class="modal-content">
@@ -81,9 +113,15 @@
 					<div class="grayRectangle">
 						<i class="fa-regular fa-image"></i>
 					</div>
-				  <label for="photoInput"> Ajouter une photo :</label>
-				  <input type="file" id="photoInput" accept="image/*" required>
+				
+					<input type="file" id="photoInput" accept="image/*" required style="display: none;">
+					<button type="button" id="customPhotoButton" class="photo-button">+ Ajouter photo</button>
 				</div>
+				
+				<div class="form-group">
+					<label for="photoTitle">Titre de la photo :</label>
+					<input type="text" id="photoTitle" name="photoTitle" required>
+				  </div>
 				<div class="form-group">
 				  <label for="categorySelect">Choisir une catégorie :</label>
 				  <select id="categorySelect" required>
