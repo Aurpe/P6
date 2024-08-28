@@ -27,8 +27,8 @@
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<li class="logout">Logout</li>
-			<li><a href="loginPage.html">Login</a></li>
+			<li class="deconnexion">Logout</li>
+			<li><a href="loginPage.html" class="connexion">Login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 			
 		</ul>
@@ -48,29 +48,26 @@
 		</article>
 	</section>
 	<section id="portfolio">
+
 			<div class="Projet">
 				<h2>Mes Projets</h2>
 				<div class="modeModify">
 					<i class="fa-regular fa-pen-to-square"></i>
                     <p class="modifier"> Modifier </p>
-					<div class= buttonCategories>
-					</div>
 				</div>
+				<div class= buttonCategories></div>
 				<div class="gallery"></div>
-		
 			</div>
 
 	
-		<div class= buttonCategories>
-		</div>
-		<div id="modaleGalerie" class="displaymodal">
-			<div class="modalphoto">
+			<div id="modaleGalerie" class="displaymodal">
+				<div class="modalphoto">
 				<span class="close">&times;</span>
 				<h2>Galerie de Photos</h2>
 				<div class="galleryInModale"></div>
 				<button id="submitBtn">Ajouter une photo</button>
+				</div>
 			</div>
-		</div>
 
 		  <div id="myModal" class="modal">
 			<div class="modal-content">
@@ -91,10 +88,7 @@
 				<div class="form-group">
 				  <label for="categorySelect">Choisir une catégorie :</label>
 				  <select id="categorySelect" required>
-					<option value="">Sélectionner une catégorie</option>
-					<option value="1">Objets</option>
-					<option value="2">Appartements</option>
-					<option value="3">Hôtels & restaurants</option>
+				
 				  </select>
 				</div>
 				<button type="submit" id="validation">Valider</button>

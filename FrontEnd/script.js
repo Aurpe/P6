@@ -156,72 +156,77 @@ getCategories();
 // bonus : mettre un bouton logout a la place de login dans le header si on est connecté.
 // au clic sur logout -> remove le token du localStorage. 
 
-
 function checkUserStatus() {
-    // Récupérer le token depuis le localStorage
     const token = localStorage.getItem("token");
+    const editionMode = document.querySelector(".modeEdition");
+    const editionButton = document.querySelector(".modeModify");
+    const deconnexion = document.querySelector(".logout");
+    const connexion = document.querySelector(".login");
+    const categoriesContainer = document.querySelector(".buttonCategories");
+    const validation = document.querySelector("#submitBtn");
 
     if (token) {
-        // Afficher le mode édition
-        const editionMode = document.querySelector(".modeEdition");
-        const editionButton = document.querySelector(".modeModify");
-        const deconnexion = document.querySelector (".logout");
-        const connexion= document.querySelector(".login");
-
-        if (editionMode) {
-            editionMode.style.display = "block";
-            editionButton.style.display = "block";
-            deconnexion.style.display= "block";
-            connexion.style.display = "none";
-        }
-
-        // Masquer les catégories
-        const categoriesContainer = document.querySelector(".buttonCategories");
-        if (categoriesContainer) {
-            categoriesContainer.style.display = "none";
-        }
-
-
-        // Afficher le message d'activation
+        // Mode connecté
+        if (editionMode) editionMode.style.display = "block";
+        if (editionButton) editionButton.style.display = "block";
+        if (deconnexion) deconnexion.style.display = "block";
+        if (connexion) connexion.style.display = "none";
+        if (categoriesContainer) categoriesContainer.style.display = "none";
         console.log("Mode Edition connecté");
     } else {
-        // Masquer le mode édition
-        const editionMode = document.querySelector(".modeEdition");
-        if (editionMode) {
-            editionMode.style.display = "none";
-            deconnexion.style.display= "none";
-        }
-
-        // Afficher les catégories
-        const categoriesContainer = document.querySelector(".buttonCategories");
-        if (categoriesContainer) {
-            categoriesContainer.style.display = "block";
-        }
-        // Afficher un message indiquant que le mode édition n'est pas activé
+        // Mode déconnecté
+        if (editionMode) editionMode.style.display = "none";
+        if (editionButton) editionButton.style.display = "none"; 
+        if (deconnexion) deconnexion.style.display = "none";
+        if (connexion) connexion.style.display = "block"; 
+        if (categoriesContainer) categoriesContainer.style.display = "block";
         console.log("Mode Edition déconnecté");
     }
 
-    // Ajout de l'événement de déconnexion
+    if (validation) {
+        validation.addEventListener('click', openModal);
+    }
+
+    // Gestion de la déconnexion
     if (deconnexion) {
         deconnexion.addEventListener('click', function() {
-            localStorage.removeItem("token");  // Supprimer le token
-            checkUserStatus();  // Rafraîchir l'état de l'interface
+            localStorage.removeItem("token");
+            checkUserStatus();
             console.log("Déconnexion effectuée");
         });
     }
-
 }
 
-// Fermer le modal quand on clique en dehors du contenu du modal
+// Appel initial pour vérifier le statut
+checkUserStatus();
+
+// Gestion du modal
+function openModal() {
+    const modal = document.getElementById('myModal');
+    if (modal) modal.style.display = 'block';
+}
+
+function closeModal() {
+    const modal = document.getElementById('myModal');
+    if (modal) modal.style.display = 'none';
+}
+
 window.addEventListener('click', function(event) {
     const modal = document.getElementById('myModal');
-    if (event.target == modal) {
+    const closeSpan = document.querySelector('#myModal .close');
+
+    if (event.target == modal || event.target == closeSpan) {
         closeModal();
     }
 });
 
+const closeSpan = document.querySelector('#myModal .close');
+if (closeSpan) {
+    closeSpan.addEventListener('click', closeModal);
+}
 
-//Fonction pour gérer la soumission du formulaire
+
+// Fonction pour gérer la soumission du formulaire
 async function postWork(event) {
     event.preventDefault(); // Empêcher le comportement par défaut de la soumission du formulaire
 
@@ -229,77 +234,51 @@ async function postWork(event) {
     const appartementCategory= document.createElement('option');
     const hotelCategory= document.createElement('option');
 
-    objetCategory.textContent(displayCategories);
-    appartementCategory.textContent(displayCategories);
-    hotelCategory.textContent(displayCategories);
+    objetCategory.textContent(Objets);
+    appartementCategory.textContent(Appartements);
+    hotelCategory.textContent(Hotels);
 
-    objetCategory.appendChild ('#categorySelect')
-    appartementCategory.appendChild ('#categorySelect')
-    hotelCategory.appendChild('#categorySelect')
+    document.querySelector('#categorySelect').appendChild(objetCategory)
+    document.querySelector('#categorySelect').appendChild(appartementCategory)
+    document.querySelector('#categorySelect').appendChild(hotelCategory)
 
     const imageModal = document.querySelector('#photoInput').files[0];
-    const titleModal= document.querySelector('#titleInput').value;
-    const categoryModal = document.querySelector('#categorySelect').value;
+    const titleModal = document.querySelector('#titleInput').value;
+    const categoryModal = categorySelect.value;
 
-
-    const formData = new FormData(); // Créer un objet FormData avec les données du formulaire
-    formData.append('image',imageModal);
-    formData.append('title',titleModal);
-    formData.append('category',categoryModal)
+    const formData = new FormData();
+    formData.append('image', imageModal);
+    formData.append('title', titleModal);
+    formData.append('category', categoryModal);
 
     try {
+        // Récupérer le token depuis le localStorage
+        const token = localStorage.getItem('token');
+
         // Envoyer la requête POST avec les données du formulaire
         let response = await fetch('http://localhost:5678/api/works', {
             method: 'POST',
             headers: {
-                'Accept': "application/json",
                 'Authorization': `Bearer ${token}`
             },
             body: formData
-
         });
-    
-        // Déclarer le contenu de l'API à l'intérieur
-        let result = await response.json();
-    
-        // Gérer la réponse (par exemple, afficher une alerte avec le message du résultat)
+
+        // Gérer la réponse
         if (response.ok) {
-            alert("Photo ajoutée avec succès : " + result.message);
-          
-            fermerModal(); // Fermer le modal après la soumission réussie
+            let result = await response.json();
+            alert("Photo ajoutée avec succès !");
+            displayWorksInModale()
+            closeModal(); // Assurez-vous que cette fonction existe
         } else {
-            alert("Erreur : " + result.message);
+            alert("Erreur lors de l'ajout de la photo.");
         }
     } catch (error) {
         console.error("Une erreur s'est produite lors de la requête :", error);
         alert("Une erreur est survenue lors du téléchargement de la photo.");
     }
 }
-const clikHere= document.querySelector('#validation')
-clikHere.addEventListener("click", postWork);
 
-
-   
-   
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-       
-
+// Ajout de l'écouteur d'événements
+const submitButton = document.querySelector('#validation');
+submitButton.addEventListener("click", postWork);
