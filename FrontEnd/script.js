@@ -165,14 +165,14 @@ function checkUserStatus() {
         // Afficher le mode édition
         const editionMode = document.querySelector(".modeEdition");
         const editionButton = document.querySelector(".modeModify");
-        const Deconnexion = document.querySelector (".logout");
-        const Connexion= document.querySelector(".login");
+        const deconnexion = document.querySelector (".logout");
+        const connexion= document.querySelector(".login");
 
         if (editionMode) {
             editionMode.style.display = "block";
             editionButton.style.display = "block";
-            Deconnexion.style.display= "block";
-            Connexion.style.display = "none";
+            deconnexion.style.display= "block";
+            connexion.style.display = "none";
         }
 
         // Masquer les catégories
@@ -189,7 +189,7 @@ function checkUserStatus() {
         const editionMode = document.querySelector(".modeEdition");
         if (editionMode) {
             editionMode.style.display = "none";
-            Deconnexion.style.display= "none";
+            deconnexion.style.display= "none";
         }
 
         // Afficher les catégories
@@ -197,7 +197,6 @@ function checkUserStatus() {
         if (categoriesContainer) {
             categoriesContainer.style.display = "block";
         }
-
         // Afficher un message indiquant que le mode édition n'est pas activé
         console.log("Mode Edition déconnecté");
     }
@@ -222,30 +221,31 @@ window.addEventListener('click', function(event) {
 });
 
 
-/*Récupérer les éléments du modal, du formulaire, et du bouton de fermeture
-const modal = document.getElementById("myModal");
-const closeButton = document.querySelector(".close");
-const formElem = document.getElementById("photoForm");
-
-// Fonction pour ouvrir le modal (cela peut être déclenché par un clic de bouton ou un autre événement)
-function ouvrirModal() {
-    modal.style.display = "block";
-}
-
-// Fonction pour fermer le modal
-function fermerModal() {
-    modal.style.display = "none";
-}*/
-
 //Fonction pour gérer la soumission du formulaire
 async function postWork(event) {
     event.preventDefault(); // Empêcher le comportement par défaut de la soumission du formulaire
 
-    const image = document.querySelector('#photoInput').files[0];
-    const title = document.querySelector('#titleInput').value;
-    const category = document.querySelector('#categorySelect').value;
+    const objetCategory= document.createElement('option');
+    const appartementCategory= document.createElement('option');
+    const hotelCategory= document.createElement('option');
+
+    objetCategory.textContent(displayCategories);
+    appartementCategory.textContent(displayCategories);
+    hotelCategory.textContent(displayCategories);
+
+    objetCategory.appendChild ('#categorySelect')
+    appartementCategory.appendChild ('#categorySelect')
+    hotelCategory.appendChild('#categorySelect')
+
+    const imageModal = document.querySelector('#photoInput').files[0];
+    const titleModal= document.querySelector('#titleInput').value;
+    const categoryModal = document.querySelector('#categorySelect').value;
+
 
     const formData = new FormData(); // Créer un objet FormData avec les données du formulaire
+    formData.append('image',imageModal);
+    formData.append('title',titleModal);
+    formData.append('category',categoryModal)
 
     try {
         // Envoyer la requête POST avec les données du formulaire
@@ -256,8 +256,6 @@ async function postWork(event) {
                 'Authorization': `Bearer ${token}`
             },
             body: formData
-            
-
 
         });
     
@@ -267,6 +265,7 @@ async function postWork(event) {
         // Gérer la réponse (par exemple, afficher une alerte avec le message du résultat)
         if (response.ok) {
             alert("Photo ajoutée avec succès : " + result.message);
+          
             fermerModal(); // Fermer le modal après la soumission réussie
         } else {
             alert("Erreur : " + result.message);
@@ -276,31 +275,9 @@ async function postWork(event) {
         alert("Une erreur est survenue lors du téléchargement de la photo.");
     }
 }
-
-const clikHere= document.querySelector('#CESTICI')
+const clikHere= document.querySelector('#validation')
 clikHere.addEventListener("click", postWork);
 
-
-/* Récupérer les éléments du modal, du formulaire, et du bouton de fermeture
-const modal = document.getElementById("myModal");
-const closeButton = document.querySelector(".close");
-const formElem = document.getElementById("photoForm");
-
-// Fonction pour ouvrir le modal (cela peut être déclenché par un clic de bouton ou un autre événement)
-function ouvrirModal() {
-    modal.style.display = "block";
-}
-
-// Fonction pour fermer le modal
-function fermerModal() {
-    modal.style.display = "none";
-}
-
-
-
-// Attacher la fonction postWork à l'événement de soumission du formulaire
-formElem.addEventListener("submit", postWork);
-*/
 
    
    
