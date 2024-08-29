@@ -138,9 +138,10 @@ li:hover {
 	margin: auto;
 	width: 80%;
 }
-.logout{
-	display: none;
+.deconnexion{
+	display: none;	
 }
+
 #introduction article {
 	flex: 1
 }
