@@ -225,14 +225,68 @@ if (closeSpan) {
     closeSpan.addEventListener('click', closeModal);
 }
 
-
 // Fonction pour gérer la soumission du formulaire
+async function postWork(event) {
+    event.preventDefault(); // Empêcher le comportement par défaut de la soumission du formulaire
+
+    const categorySelect = document.querySelector('#categorySelect');
+    const imageModal = document.querySelector('#photoInput').files[0];
+    const titleModal = document.querySelector('#titleInput').value;
+    const categoryModal = categorySelect.value;
+
+    const formData = new FormData();
+    formData.append('image', imageModal);
+    formData.append('title', titleModal);
+    formData.append('category', categoryModal);
+
+    try {
+        // Récupérer le token depuis le localStorage
+        const token = localStorage.getItem('token');
+
+        // Envoyer la requête POST avec les données du formulaire
+        let response = await fetch('http://localhost:5678/api/works', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+            body: formData
+        });
+
+        // Gérer la réponse
+        if (response.ok) {
+            let result = await response.json();
+            alert("Photo ajoutée avec succès !");
+            getWorks(); // Rafraîchir la galerie
+            closeModal(); // Ferme la modal
+        } else {
+            alert("Erreur lors de l'ajout de la photo.");
+        }
+    } catch (error) {
+        console.error("Une erreur s'est produite lors de la requête :", error);
+        alert("Une erreur est survenue lors du téléchargement de la photo.");
+    }
+}
+
+// Ajout de l'écouteur d'événements
+const submitButton = document.querySelector('#validation');
+submitButton.addEventListener("click", postWork);
+
+
+/* Fonction pour gérer la soumission du formulaire
 async function postWork(event) {
     event.preventDefault(); // Empêcher le comportement par défaut de la soumission du formulaire
 
     const objetCategory= document.createElement('option');
     const appartementCategory= document.createElement('option');
     const hotelCategory= document.createElement('option');
+
+    objetCategory.value = "1";
+    appartementCategory.value = "2";
+    hotelCategory.value = "3";
+
+    const hotelValue = hotelCategory.value;
+    const appartementValue  = appartementCategory.value;
+    const objetValue = objetCategory.value;
 
     objetCategory.textContent(Objets);
     appartementCategory.textContent(Appartements);
@@ -250,6 +304,8 @@ async function postWork(event) {
     formData.append('image', imageModal);
     formData.append('title', titleModal);
     formData.append('category', categoryModal);
+
+    displayCategories()
 
     try {
         // Récupérer le token depuis le localStorage
@@ -281,4 +337,4 @@ async function postWork(event) {
 
 // Ajout de l'écouteur d'événements
 const submitButton = document.querySelector('#validation');
-submitButton.addEventListener("click", postWork);
+submitButton.addEventListener("click", postWork);*/
