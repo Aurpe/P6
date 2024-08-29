@@ -234,10 +234,27 @@ async function postWork(event) {
     const titleModal = document.querySelector('#titleInput').value;
     const categoryModal = categorySelect.value;
 
+    const objetCategory = document.createElement('option');
+    objetCategory.value = "1";
+    objetCategory.text = "Objet";
+
+    const appartementCategory = document.createElement('option');
+    appartementCategory.value = "2";
+    appartementCategory.text = "Appartement";
+
+    const hotelCategory = document.createElement('option');
+    hotelCategory.value = "3";
+    hotelCategory.text = "Hotel";
+
+    document.querySelector('#categorySelect').appendChild(objetCategory)
+    document.querySelector('#categorySelect').appendChild(appartementCategory)
+    document.querySelector('#categorySelect').appendChild(hotelCategory)
+
     const formData = new FormData();
     formData.append('image', imageModal);
     formData.append('title', titleModal);
     formData.append('category', categoryModal);
+
 
     try {
         // Récupérer le token depuis le localStorage
@@ -292,9 +309,9 @@ async function postWork(event) {
     appartementCategory.textContent(Appartements);
     hotelCategory.textContent(Hotels);
 
-    document.querySelector('#categorySelect').appendChild(objetCategory)
-    document.querySelector('#categorySelect').appendChild(appartementCategory)
-    document.querySelector('#categorySelect').appendChild(hotelCategory)
+    document.querySelector('#categorySelect').appendchild(objetCategory)
+    document.querySelector('#categorySelect').appendchild(appartementCategory)
+    document.querySelector('#categorySelect').appendchild(hotelCategory)
 
     const imageModal = document.querySelector('#photoInput').files[0];
     const titleModal = document.querySelector('#titleInput').value;
