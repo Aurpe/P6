@@ -160,8 +160,8 @@ function checkUserStatus() {
     const token = localStorage.getItem("token");
     const editionMode = document.querySelector(".modeEdition");
     const editionButton = document.querySelector(".modeModify");
-    const deconnexion = document.querySelector(".logout");
-    const connexion = document.querySelector(".login");
+    const deconnexion = document.querySelector(".deconnexion");
+    const connexion = document.querySelector(".connexion");
     const categoriesContainer = document.querySelector(".buttonCategories");
     const validation = document.querySelector("#submitBtn");
 
@@ -173,6 +173,8 @@ function checkUserStatus() {
         if (connexion) connexion.style.display = "none";
         if (categoriesContainer) categoriesContainer.style.display = "none";
         console.log("Mode Edition connecté");
+
+
     } else {
         // Mode déconnecté
         if (editionMode) editionMode.style.display = "none";
@@ -196,6 +198,11 @@ function checkUserStatus() {
         });
     }
 }
+const editionButton = document.querySelector(".modeModify");
+editionButton.addEventListener('click', function () {
+    const modalToOpen = document.querySelector('#modaleGalerie');
+    modalToOpen.style.display = "block";
+})
 
 // Appel initial pour vérifier le statut
 checkUserStatus();
@@ -234,22 +241,6 @@ async function postWork(event) {
     const titleModal = document.querySelector('#titleInput').value;
     const categoryModal = categorySelect.value;
 
-    const objetCategory = document.createElement('option');
-    objetCategory.value = "1";
-    objetCategory.text = "Objet";
-
-    const appartementCategory = document.createElement('option');
-    appartementCategory.value = "2";
-    appartementCategory.text = "Appartement";
-
-    const hotelCategory = document.createElement('option');
-    hotelCategory.value = "3";
-    hotelCategory.text = "Hotel";
-
-    document.querySelector('#categorySelect').appendChild(objetCategory)
-    document.querySelector('#categorySelect').appendChild(appartementCategory)
-    document.querySelector('#categorySelect').appendChild(hotelCategory)
-
     const formData = new FormData();
     formData.append('image', imageModal);
     formData.append('title', titleModal);
@@ -282,6 +273,19 @@ async function postWork(event) {
         console.error("Une erreur s'est produite lors de la requête :", error);
         alert("Une erreur est survenue lors du téléchargement de la photo.");
     }
+}
+
+function displayCategoriesInModale(categories) {
+    const optionsContainer = document.querySelector('#categorySelect');
+   
+    categories.forEach(category => {
+        const selectCategories = document.createElement('option');
+        selectCategories.classList.add('categorySelect');
+
+        selectCategories.textContent = category.name;
+        selectCategories.value = category.id;
+        optionsContainer.appendChild(selectCategories);
+    });
 }
 
 // Ajout de l'écouteur d'événements
