@@ -102,7 +102,8 @@ function getCategories (){
     .then(data => {
         console.table(data);
         displayCategories(data);
-    
+        displayCategoriesInModale(data);
+
     })
     .catch(error =>{
         console.log(error)
@@ -276,12 +277,11 @@ async function postWork(event) {
 }
 
 function displayCategoriesInModale(categories) {
-    const optionsContainer = document.querySelector('categorySelect');
+    const optionsContainer = document.querySelector('#categorySelect');
+    //selectCategories.classList.add('catego');
    
     categories.forEach(category => {
         const selectCategories = document.createElement('option');
-        selectCategories.classList.add('categorySelect');
-
         selectCategories.textContent = category.name;
         selectCategories.value = category.id;
         optionsContainer.appendChild(selectCategories);
