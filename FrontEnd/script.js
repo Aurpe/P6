@@ -276,7 +276,7 @@ async function postWork(event) {
 }
 
 function displayCategoriesInModale(categories) {
-    const optionsContainer = document.querySelector('#categorySelect');
+    const optionsContainer = document.querySelector('categorySelect');
    
     categories.forEach(category => {
         const selectCategories = document.createElement('option');
@@ -287,6 +287,7 @@ function displayCategoriesInModale(categories) {
         optionsContainer.appendChild(selectCategories);
     });
 }
+
 
 // Ajout de l'écouteur d'événements
 const submitButton = document.querySelector('#validation');
