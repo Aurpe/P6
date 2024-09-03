@@ -84,7 +84,7 @@ body {
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 80px 0
 }
 section {
 	margin: 50px 0
@@ -164,13 +164,13 @@ li:hover {
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
-	width: 173px;
-    height: 30px;
-    top: 720px;
-    left: 634px;
-    gap: 0px;
-    opacity: 0px;
+}
 
+.modeModify{
+	display:flex;
+}
+.fa-regular .fa-pen {
+	margin-right:10%;
 }
 .gallery {
 	width: 100%;
@@ -185,12 +185,13 @@ li:hover {
 
 }
 .buttonCategories{
-display: flex;
-align-items: center;
-flex-wrap: wrap;
-flex-direction: row;
-justify-content: space-evenly;
-margin-bottom:30px;
+	display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-bottom: 20px;
+    width: 100%;
+    justify-content: space-evenly;
 }
 
 .filterCategory{
@@ -208,6 +209,8 @@ margin-bottom:30px;
     background-color: #1D6154;
 	color: white;
 }
+
+
 .grayRectangle{
 	width: 420px;
 	height: 169px;
@@ -295,24 +298,7 @@ footer nav ul {
 	overflow: auto;
 	background-color: rgba(0,0,0,0.4);
   }
-  
-  .modal-content {
-	background-color: #fefefe;
-	margin: 15% auto;
-	padding: 20px;
-	border: 1px solid #888;
-	width: 80%;
-	max-width: 500px;
-  }
-  
-  .close {
-	color: #aaa;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
-	cursor: pointer;
-  }
-  
+
   .close:hover,
   .close:focus {
 	color: black;
@@ -359,6 +345,10 @@ footer nav ul {
 	color: white;
 }
 
+.Line{
+	border: solid 1px grey;
+}
+
 .modal-content {
     background-color: #fefefe;
     margin: 15% auto; 
@@ -373,7 +363,9 @@ footer nav ul {
     float: right;
     font-size: 28px;
     font-weight: bold;
+	cursor: pointer;
 }
+
 
 .close:hover,
 .close:focus {
