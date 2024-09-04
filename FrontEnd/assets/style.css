@@ -218,10 +218,47 @@ li:hover {
 	background-color:#E8F1F6;
 	border:1px solid black;
 	margin:auto;
+	display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }
 
-.fa-regular .fa-image{
-	font-size: 100px;
+.photo-button{
+	height: 36px;
+    border-radius: 50px;
+    width: 173px;
+    color: #306685;
+    background-color: #CBD6DC;
+    font-size: 14px;
+    font-family: work sans-serif;
+    border: 1px solid #CBD6DC;
+    font-weight: bolder;
+}
+
+.photoInput{
+	position: relative;
+    z-index: 1;
+    top: 50px;
+    left: 50px;
+    height: 36px;
+    opacity: 0;
+}
+
+.form-group1{
+	display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.titleInput #categorySelect{
+	height: 51px;
+    width: 420px;
+}
+
+.iconsImage{
+	font-size: 76px;
     color: #B9C5CC;
 }
 .modaleGalerie{
@@ -327,6 +364,11 @@ footer nav ul {
     background-color: white;
      
 }
+
+.photoContainer{
+	display: none;
+
+}
 .submitBtn{
 	width: 237px;
     height: 36px;
@@ -355,7 +397,8 @@ footer nav ul {
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
-    max-width: 600px;
+    width: 670px;
+    height: 630px;
 }
 
 .close {
@@ -396,6 +439,18 @@ footer nav ul {
     padding: 4px;
     font-size: 12px;
     cursor: pointer;   
+}
+
+.photo-Button{
+	height: 36px;
+    border-radius: 50px;
+    width: 173px;
+    color: #306685;
+    background-color: #CBD6DC;
+    font-size: 14px;
+    font-family: work sans-serif;
+    border: 1px solid #CBD6DC;
+    font-weight: bolder;
 }
 
 #loginForm {

@@ -242,6 +242,23 @@ async function postWork(event) {
     const titleModal = document.querySelector('#titleInput').value;
     const categoryModal = categorySelect.value;
 
+    const photoContainer = document.querySelector('.photoContainer');
+
+    if (imageModal) {
+        imageModal.style.display = "block";
+        imageModal.appendChild(photoContainer);
+
+        imageModal.src = image.imageUrl;
+        imageModal.alt = image.title;
+    
+}
+    /*const photo= document.querySelector('photoContainer')
+     if (imageModal) imageModal.style.display = "block";
+     imageModal.appendChild('photoContainer')
+     imageModal.src = image.imageUrl;
+     imageModal.alt = image.title;*/
+
+
     const formData = new FormData();
     formData.append('image', imageModal);
     formData.append('title', titleModal);
