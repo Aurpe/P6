@@ -14,12 +14,14 @@
 
 </head>
 <body>
-	<div class="modeEdition">
-		<i class="fa-regular fa-pen-to-square"></i>
-		<p>Mode Edition</p>
-	</div>
 	
 <header>
+	<div class="modeEdition">
+		<div class="Edition">
+			<i class="fa-regular fa-pen-to-square iconsPen"></i>
+			<p>Mode Edition</p>	
+		</div>
+	</div>
 
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	
@@ -47,8 +49,8 @@
 			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
 		</article>
 	</section>
-	<section id="portfolio">
 
+	<section id="portfolio">
 			<div class="Projet">
 				<h2>Mes Projets</h2>
 				<div class="modeModify">
@@ -58,21 +60,24 @@
 				<div class= buttonCategories></div>
 				<div class="gallery"></div>
 			</div>
+	</section>
 
-	
-			<div id="modaleGalerie" class="displaymodal">
-				<div class="modalphoto">
-				<span class="close">&times;</span>
-				<h2>Galerie de Photos</h2>
-				<div class="galleryInModale"></div>
-				<button id="submitBtn">Ajouter une photo</button>
-				</div>
+	<section class ="Modale">
+		<div id="modaleGalerie" class="displaymodal">
+
+			<div class="modalphoto">
+			<span class="close">&times;</span>
+			<p class="modalTitle">Galerie de Photos</p>
+			<div class="galleryInModale"></div>
+			<div class="Line"></div>
+			<button id="submitBtn">Ajouter une photo</button>
 			</div>
+		</div>
 
-		  <div id="myModal" class="modal">
+		<div id="myModal" class="modal">
 			<div class="modal-content">
 			  <span class="close">&times;</span>
-			  <h2>Ajout photo</h2>
+			  <p class="modalTitle">Ajout photo</p>
 			  <form id="photoForm">
 				<div class="form-group">
 					<div class="photoContainer"></div>
@@ -82,23 +87,23 @@
 				  <button type="button" id="customPhotoButton" class="photo-button">+ Ajouter photo</button>
 				  <p>jpg, png : 4mo max</p>
 				</div>
-				</div>
+			</div>
 
-				<div class="form-group1">
-				  <label for="titleInput">Titre de la photo :</label>
+			<div class="form-group1">
+				  <label for="titleInput">Titre:</label>
 				  <input type="text" id="titleInput" name="titleInput" required>
-				</div>
-				<div class="form-group1">
-				  <label for="categorySelect">Choisir une catégorie :</label>
+			</div>
+			<div class="form-group1">
+				  <label for="categorySelect">Catégorie :</label>
 				  <select id="categorySelect" required></select>
-				</div>
-				<div class="Line"></div>
+			</div>
+			<div class="Line"></div>
 				<button type="submit" id="validation">Valider</button>
 			  </form>
 			</div>
-		  </div>
-		
+		</div>
 	</section>
+
 	<section id="contact">
 		<h2>Contact</h2>
 		<p>Vous avez un projet ? Discutons-en !</p>

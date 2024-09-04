@@ -166,6 +166,20 @@ li:hover {
 	margin-bottom: 1em;
 }
 
+.Edition{
+	display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    top: 30%;
+}
+
+.iconsPen{
+	margin-right:1rem;
+}
+
 .modeModify{
 	display:flex;
 }
@@ -216,7 +230,7 @@ li:hover {
 	height: 169px;
 	border-radius: 3px;
 	background-color:#E8F1F6;
-	border:1px solid black;
+	border:1px solid #E8F1F6 ;
 	margin:auto;
 	display: flex;
     flex-direction: column;
@@ -349,8 +363,12 @@ footer nav ul {
   
   label {
 	display: block;
-	margin-bottom: 5px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    margin-right: 22rem;
   }
+	
+
   .displaymodal {
 	border-radius: 10px;
 	display: none;
@@ -369,7 +387,7 @@ footer nav ul {
 	display: none;
 
 }
-.submitBtn{
+#submitBtn{
 	width: 237px;
     height: 36px;
     top: 1267px;
@@ -388,7 +406,11 @@ footer nav ul {
 }
 
 .Line{
-	border: solid 1px grey;
+	border: solid 1px #B3B3B3;
+	width:420px;
+	margin:auto;
+	position: relative;
+    top: 50px;
 }
 
 .modal-content {
@@ -407,6 +429,20 @@ footer nav ul {
     font-size: 28px;
     font-weight: bold;
 	cursor: pointer;
+}
+
+#validation{
+	position: relative;
+    top: 6rem;
+    left: 30%;
+    width: 237px;
+    height: 36px;
+    border-radius: 60px;
+    opacity: 1px;
+    font-family: Syne;
+    background-color: #1D6154;
+    color: white;
+	border: 1px solid #1D6154;
 }
 
 
@@ -430,17 +466,25 @@ footer nav ul {
     height: auto;
 }
 
-.fa-solid .fa-trash{
-	position: absolute;
-    top: 5px;
-    right: 5px;
+.fa-trash{
+	position: relative;
     color: white;
     background-color: black;
     padding: 4px;
     font-size: 12px;
-    cursor: pointer;   
+    cursor: pointer;
+    bottom: 7rem;
+    right: 1.5rem;
 }
-
+	
+.modalTitle{
+	font-family: 'work sans';
+	font-size: 26px;
+	font-weight:normal;
+    margin-bottom: 30px;
+    margin-top: 20px;
+	margin-left:40%
+}
 .photo-Button{
 	height: 36px;
     border-radius: 50px;
@@ -448,9 +492,22 @@ footer nav ul {
     color: #306685;
     background-color: #CBD6DC;
     font-size: 14px;
-    font-family: work sans-serif;
+    font-family: 'work sans';
     border: 1px solid #CBD6DC;
     font-weight: bolder;
+}
+
+#titleInput{
+	width:420px;
+	height:51px;
+	font-weight:bold;
+	font-family:'work sans'
+}
+#categorySelect{
+	width:420px;
+	height:51px;
+	font-family:'work sans';
+	
 }
 
 #loginForm {
