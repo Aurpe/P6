@@ -343,36 +343,32 @@ async function postWork(event) {
             const buttonAdd = document.getElementById('customPhotoButton');
             const fileInput = document.getElementById('photoInput');
         
-            if (buttonAdd) {
-                buttonAdd.addEventListener('click', function() {
-                    const file = imageFile.files[0];
+            if (imageFile) {
+                const fileReader = new FileReader();
         
-                    if (imageFile) {
-                        const fileReader = new FileReader();
+                fileReader.onload = function(e) {
+                    // Vider le contenu précédent
+                    photoContainer.innerHTML = '';
+                    
+                    // Créer un élément image
+                    const img = document.createElement('img');
+                    img.src = e.target.result; // URL de données de l'image
+                    img.alt = 'Image téléchargée avec succès'; // Texte alternatif
         
-                        fileReader.onload = function(e) {
-                            // Vider le contenu précédent
-                            photoContainer.innerHTML = '';
-                            
-                            // Créer un élément image
-                            const img = document.createElement('img');
-                            img.src = e.target.result; // URL de données de l'image
-                            img.alt = 'Image téléchargé avec succès'; // Texte alternatif
+                    // Ajouter l'image au conteneur
+                    photoContainer.appendChild(img);
+                    
+                    // Afficher le conteneur d'image et masquer le champ de fichier et le bouton
+                    photoContainer.style.display = 'block';
+                    fileInput.style.display = 'none';
+                    buttonAdd.style.display = 'none';
+                };
         
-                            // Ajouter l'image au conteneur
-                            photoContainer.appendChild(img);
-                            
-                            photoContainer.style.display = 'block';
-                            fileInput.style.display = 'none';
-                            buttonAdd.style.display = 'none';
-                        };
-        
-                        fileReader.readAsDataURL(file); 
-                    }
-                });
+                fileReader.readAsDataURL(imageFile); 
             }
         }
     }
+        
     try {
         // Récupérer le token depuis le localStorage
         const token = localStorage.getItem('token');
