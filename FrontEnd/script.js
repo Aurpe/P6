@@ -208,30 +208,89 @@ editionButton.addEventListener('click', function () {
 // Appel initial pour vérifier le statut
 checkUserStatus();
 
-// Gestion du modal
+// Fonction générique pour ouvrir un modal
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = 'block';
+    }
+}
+
+// Fonction générique pour fermer un modal
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// Événement pour fermer les modals quand on clique en dehors d'eux ou sur le bouton "fermer"
+window.addEventListener('click', function(event) {
+    const myModal = document.getElementById('myModal');
+    const modaleGalerie = document.getElementById('modaleGalerie');
+    const closeMyModal = document.querySelector('#myModal .close');
+    const closeModaleGalerie = document.querySelector('#modaleGalerie .close');
+
+    // Fermer "myModal" si on clique en dehors ou sur le bouton de fermeture
+    if (event.target === myModal || event.target === closeMyModal) {
+        closeModal('myModal');
+    }
+
+    // Fermer "modaleGalerie" si on clique en dehors ou sur le bouton de fermeture
+    if (event.target === modaleGalerie || event.target === closeModaleGalerie) {
+        closeModal('modaleGalerie');
+    }
+});
+// Ouverture du modal "myModal"
+const openMyModalButton = document.querySelector('#openMyModalButton');
+if (openMyModalButton) {
+    openMyModalButton.addEventListener('click', function() {
+        openModal('myModal');
+    });
+}
+
+// Ouverture du modal "modaleGalerie"
+const openModaleGalerieButton = document.querySelector('#openModaleGalerieButton');
+if (openModaleGalerieButton) {
+    openModaleGalerieButton.addEventListener('click', function() {
+        openModal('modaleGalerie');
+    });
+}
+
+
+//Gestion du modal
 function openModal() {
     const modal = document.getElementById('myModal');
     if (modal) modal.style.display = 'block';
 }
 
-function closeModal() {
-    const modal = document.getElementById('myModal');
-    if (modal) modal.style.display = 'none';
+
+// Fonction générique pour fermer un modal
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = 'none';
+    }
 }
 
+// Événement pour fermer les modals quand on clique en dehors d'eux ou sur le bouton "fermer"
 window.addEventListener('click', function(event) {
-    const modal = document.getElementById('myModal');
-    const closeSpan = document.querySelector('#myModal .close');
+    const myModal = document.getElementById('myModal');
+    const modaleGalerie = document.getElementById('modaleGalerie');
+    const closeMyModal = document.querySelector('#myModal .close');
+    const closeModaleGalerie = document.querySelector('#modaleGalerie .close');
 
-    if (event.target == modal || event.target == closeSpan) {
-        closeModal();
+    // Fermer "myModal" si on clique en dehors ou sur le bouton de fermeture
+    if (event.target === myModal || event.target === closeMyModal) {
+        closeModal('myModal');
+    }
+
+    // Fermer "modaleGalerie" si on clique en dehors ou sur le bouton de fermeture
+    if (event.target === modaleGalerie || event.target === closeModaleGalerie) {
+        closeModal('modaleGalerie');
     }
 });
 
-const closeSpan = document.querySelector('#myModal .close');
-if (closeSpan) {
-    closeSpan.addEventListener('click', closeModal);
-}
 
 // Fonction pour gérer la soumission du formulaire
 async function postWork(event) {
@@ -241,22 +300,36 @@ async function postWork(event) {
     const imageModal = document.querySelector('#photoInput').files[0];
     const titleModal = document.querySelector('#titleInput').value;
     const categoryModal = categorySelect.value;
+    const photoContainer = document.querySelector('.previewImg');
+    const imageFile = imageInput.files[0]; // Récupérer le fichier image sélectionné
 
-    const photoContainer = document.querySelector('.photoContainer');
 
-    if (imageModal) {
-        imageModal.style.display = "block";
-        imageModal.appendChild(photoContainer);
-
-        imageModal.src = image.imageUrl;
-        imageModal.alt = image.title;
+// Gestion de la prévisualisation de l'image
+if (imageFile) {
+    const reader = new FileReader(); // Créer un lecteur de fichier
+        
+        // Créer un élément img pour afficher l'aperçu
+        const img = document.createElement('img');
+        img.alt = titleModal;
     
+        // Ajouter l'image dans le conteneur de prévisualisation
+        photoContainer.appendChild(img);
+        photoContainer.style.display = 'block'; // Afficher le conteneur d'aperçu
+    
+    reader.readAsDataURL(imageFile);  // Lire le fichier sélectionné en tant qu'URL de données
 }
-    /*const photo= document.querySelector('photoContainer')
-     if (imageModal) imageModal.style.display = "block";
-     imageModal.appendChild('photoContainer')
-     imageModal.src = image.imageUrl;
-     imageModal.alt = image.title;*/
+
+document.querySelector('#photoInput').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const photoContainer = document.querySelector('.previewImg');
+            photoContainer.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    }
+});
 
 
     const formData = new FormData();
