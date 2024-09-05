@@ -300,44 +300,79 @@ async function postWork(event) {
     const imageModal = document.querySelector('#photoInput').files[0];
     const titleModal = document.querySelector('#titleInput').value;
     const categoryModal = categorySelect.value;
-    const photoContainer = document.querySelector('.previewImg');
-    const imageFile = imageInput.files[0]; // Récupérer le fichier image sélectionné
+    
+/* Gestion de la prévisualisation de l'image
+    const filePreview = document.getElementById('filePreview');
+   const photoContainer = document.querySelector('.previewImg');
+   const buttonAdd = docuement.getElementById('customPhotoButton')
 
+   if (buttonAdd) {
+    const fileReader = new FileReader ();
+    fileReader.readAsDataURL(buttonAdd);
+    console.log(fileReader);
+    fileReader.addEventListener("load", function(){
+        filePreview.style.display = "none"
+        photoContainer.style.display= "block"
+        buttonAdd.style.display= "none"
 
-// Gestion de la prévisualisation de l'image
-if (imageFile) {
-    const reader = new FileReader(); // Créer un lecteur de fichier
+    })
+   }*/
+    async function postWork(event) {
+        event.preventDefault(); // Empêcher le comportement par défaut de la soumission du formulaire
+    
+        const categorySelect = document.querySelector('#categorySelect');
+        const imageFile = document.querySelector('#photoInput').files[0];
+        const titleModal = document.querySelector('#titleInput').value;
+        const categoryModal = categorySelect.value;
+    
+        const formData = new FormData();
+        formData.append('image', imageModal);
+        formData.append('title', titleModal);
+        formData.append('category', categoryModal);
+
+        async function postWork(event) {
+            event.preventDefault(); // Empêcher le comportement par défaut de la soumission du formulaire
         
-        // Créer un élément img pour afficher l'aperçu
-        const img = document.createElement('img');
-        img.alt = titleModal;
-    
-        // Ajouter l'image dans le conteneur de prévisualisation
-        photoContainer.appendChild(img);
-        photoContainer.style.display = 'block'; // Afficher le conteneur d'aperçu
-    
-    reader.readAsDataURL(imageFile);  // Lire le fichier sélectionné en tant qu'URL de données
-}
-
-document.querySelector('#photoInput').addEventListener('change', function(event) {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const photoContainer = document.querySelector('.previewImg');
-            photoContainer.style.display = 'block';
-        };
-        reader.readAsDataURL(file);
+            const categorySelect = document.querySelector('#categorySelect');
+            const imageFile = document.querySelector('#photoInput').files[0];
+            const titleModal = document.querySelector('#titleInput').value;
+            const categoryModal = categorySelect.value;
+            
+            // Gestion de la prévisualisation de l'image
+            const photoContainer = document.querySelector('.photoContainer');
+            const buttonAdd = document.getElementById('customPhotoButton');
+            const fileInput = document.getElementById('photoInput');
+        
+            if (buttonAdd) {
+                buttonAdd.addEventListener('click', function() {
+                    const file = imageFile.files[0];
+        
+                    if (imageFile) {
+                        const fileReader = new FileReader();
+        
+                        fileReader.onload = function(e) {
+                            // Vider le contenu précédent
+                            photoContainer.innerHTML = '';
+                            
+                            // Créer un élément image
+                            const img = document.createElement('img');
+                            img.src = e.target.result; // URL de données de l'image
+                            img.alt = 'Image téléchargé avec succès'; // Texte alternatif
+        
+                            // Ajouter l'image au conteneur
+                            photoContainer.appendChild(img);
+                            
+                            photoContainer.style.display = 'block';
+                            fileInput.style.display = 'none';
+                            buttonAdd.style.display = 'none';
+                        };
+        
+                        fileReader.readAsDataURL(file); 
+                    }
+                });
+            }
+        }
     }
-});
-
-
-    const formData = new FormData();
-    formData.append('image', imageModal);
-    formData.append('title', titleModal);
-    formData.append('category', categoryModal);
-
-
     try {
         // Récupérer le token depuis le localStorage
         const token = localStorage.getItem('token');

@@ -419,7 +419,9 @@ footer nav ul {
     font-size: 28px;
     font-weight: bold;
 	cursor: pointer;
-	margin-right:20px;
+	position: relative;
+    top: 20px;
+    right: 20px;
 }
 
 #validation{
@@ -474,7 +476,7 @@ footer nav ul {
 	font-weight:normal;
     margin-bottom: 30px;
     margin-top: 20px;
-	margin-left:30%
+	margin-left:40%
 }
 .photo-Button{
 	height: 36px;
