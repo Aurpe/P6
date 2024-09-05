@@ -476,7 +476,14 @@ footer nav ul {
 	font-weight:normal;
     margin-bottom: 30px;
     margin-top: 20px;
-	margin-left:40%
+}
+
+.contentTitle{
+	display: flex;
+    align-items: flex-start;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    margin-left: 30%;
 }
 .photo-Button{
 	height: 36px;
@@ -503,9 +510,16 @@ footer nav ul {
 }
 
 .photoContainer{
+	width: 129px;
+    position: absolute;
+    z-index: 1;
+    left: 45%;
+	
+}
+
+.preview-image{
 	width:129px;
 	height:193px;
-	position:absolute;
 }
 
 #loginForm {

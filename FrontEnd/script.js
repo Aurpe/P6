@@ -118,6 +118,9 @@ function displayCategories(categories) {
     allButton.classList.add('filterCategory');
     buttonsContainer.appendChild(allButton);
     // Faire en sorte que si on clic sur le button "tous", on réaffiche le tableau complet
+    allButton.addEventListener('click', function() {
+        getWorks()
+    })
    
     categories.forEach(category => {
         const btnCategories = document.createElement('button');
@@ -320,34 +323,36 @@ async function postWork(event) {
         formData.append('category', categoryModal);*/
 
         function getImg() {
-            const fileInput = document.querySelector('#photoInput'); 
-            const photoContainer = document.querySelector('.photoContainer'); 
-            const buttonAdd = document.querySelector('#customPhotoButton'); 
-            const preview = document.querySelector('.previewImg'); 
-            const iconsImage = document.querySelector('.iconsImage'); 
-            const formatImg = document.querySelector('.formatImage'); 
+            const fileInput = document.getElementById('photoInput');
+            const photoContainer = document.querySelector('.photoContainer');
+            const buttonAdd = document.getElementById('customPhotoButton');
+            const preview = document.querySelector('.previewImg');
+            const iconsImage = document.querySelector('.iconsImage');
+            const formatImg = document.querySelector('.formatImage');
         
             fileInput.addEventListener('change', function(event) {
                 const file = event.target.files[0];
                 if (file) {
                     const reader = new FileReader();
                     reader.onload = function(e) {
-                        // Afficher l'image sélectionnée dans le conteneur
-                        photoContainer.innerHTML = `<img src="${e.target.result}" alt="Image preview" style="max-width: 100%; height: auto;">`;
+                        photoContainer.innerHTML = `<img src="${e.target.result}" alt="Image preview" class="preview-image" style="max-width: 100%; height: auto;">`;
                         photoContainer.style.display = 'block';
-        
-                        // Masquer le bouton "Ajouter photo" et l'input de fichier
                         buttonAdd.style.display = 'none';
                         fileInput.style.display = 'none';
-        
-                        // Masquer l'icône d'image et le texte de format
-                        if (iconsImage) iconsImage.style.display = 'none';
-                        if (formatImg) formatImg.style.display = 'none';
+                        preview.style.display = 'block';
+                        iconsImage.style.display = 'none';
+                        formatImg.style.display = 'none';
                     };
                     reader.readAsDataURL(file);
                 }
             });
         }
+        
+        // Appel direct de la fonction
+        getImg();
+
+        
+        
         
 /*function getImg() {
     const fileInput = document.getElementById('#photoInput');
@@ -388,7 +393,7 @@ async function postWork(event) {
     const categoryModal = categorySelect.value;
    
     const formData = new FormData();
-    formData.append('image', imageModal);
+    formData.append('image', imageFile);
     formData.append('title', titleModal);
     formData.append('category', categoryModal);
  
