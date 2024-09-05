@@ -110,7 +110,6 @@ function getCategories (){
     })
 }
 
-
 function displayCategories(categories) {
     const buttonsContainer = document.querySelector('.buttonCategories');
    
@@ -481,3 +480,11 @@ async function postWork(event) {
 // Ajout de l'écouteur d'événements
 const submitButton = document.querySelector('#validation');
 submitButton.addEventListener("click", postWork);*/
+
+
+
+
+
+
+
+
