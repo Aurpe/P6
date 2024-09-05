@@ -319,11 +319,45 @@ async function postWork(event) {
         formData.append('title', titleModal);
         formData.append('category', categoryModal);*/
 
-
-function getImg() {
-    const fileInput = document.getElementById('photoInput');
+        function getImg() {
+            const fileInput = document.querySelector('#photoInput'); 
+            const photoContainer = document.querySelector('.photoContainer'); 
+            const buttonAdd = document.querySelector('#customPhotoButton'); 
+            const preview = document.querySelector('.previewImg'); 
+            const iconsImage = document.querySelector('.iconsImage'); 
+            const formatImg = document.querySelector('.formatImage'); 
+        
+            fileInput.addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        // Afficher l'image sélectionnée dans le conteneur
+                        photoContainer.innerHTML = `<img src="${e.target.result}" alt="Image preview" style="max-width: 100%; height: auto;">`;
+                        photoContainer.style.display = 'block';
+        
+                        // Masquer le bouton "Ajouter photo" et l'input de fichier
+                        buttonAdd.style.display = 'none';
+                        fileInput.style.display = 'none';
+        
+                        // Masquer l'icône d'image et le texte de format
+                        if (iconsImage) iconsImage.style.display = 'none';
+                        if (formatImg) formatImg.style.display = 'none';
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+        
+/*function getImg() {
+    const fileInput = document.getElementById('#photoInput');
     const photoContainer = document.querySelector('.photoContainer');
-    const buttonAdd = document.getElementById('customPhotoButton');
+    const buttonAdd = document.getElementById('#customPhotoButton');
+    const Preview= document.querySelector('.previewImg')
+    const iconsImage= document.querySelector ('.iconsimage')
+    const formatImg= document.querySelector ('.formatImage')
+
+
 
     fileInput.addEventListener('change', function(event) {
         const file = event.target.files[0];
@@ -332,14 +366,18 @@ function getImg() {
             reader.onload = function(e) {
                 photoContainer.innerHTML = `<img src="${e.target.result}" alt="Image preview" style="max-width: 100%; height: auto;">`;
                 photoContainer.style.display = 'block';
-    
+                buttonAdd.style.display='none'
+                fileInput.style.display= 'none'
+                //Preview.style.display= 'block';
+                iconsImage.style.display= 'none';
+                formatImg.style.display= 'none'
             };
             reader.readAsDataURL(file);
         }
     });
 }
 
-getImg ()
+getImg ()*/
 
 async function postWork(event) {
     event.preventDefault(); // Empêcher le comportement par défaut de la soumission du formulaire

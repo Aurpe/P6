@@ -350,7 +350,7 @@ footer nav ul {
 	background-color: rgba(0,0,0,0.4);
   }
   
-  .form-group {
+.form-group {
 	margin-bottom: 15px;
   }
   
@@ -362,7 +362,7 @@ footer nav ul {
   }
 	
 
-  .displaymodal {
+.displaymodal {
 	border-radius: 10px;
 	display: none;
     position: fixed;
@@ -500,7 +500,12 @@ footer nav ul {
 	width:420px;
 	height:51px;
 	font-family:'work sans';
-	
+}
+
+.photoContainer{
+	width:129px;
+	height:193px;
+	position:absolute;
 }
 
 #loginForm {
