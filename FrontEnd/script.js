@@ -14,7 +14,6 @@ function getWorks (){
     })
 }
 
-
 function displayWorks(images) {
     const galleryDiv = document.querySelector('.gallery');
     galleryDiv.innerHTML = ''
@@ -282,7 +281,7 @@ window.addEventListener('click', function(event) {
 });
 
 
-// Fonction pour gérer la soumission du formulaire
+/* Fonction pour gérer la soumission du formulaire
 async function postWork(event) {
     event.preventDefault(); // Empêcher le comportement par défaut de la soumission du formulaire
 
@@ -307,7 +306,7 @@ async function postWork(event) {
 
     })
    }*/
-    async function postWork(event) {
+    /*async function postWork(event) {
         event.preventDefault(); // Empêcher le comportement par défaut de la soumission du formulaire
     
         const categorySelect = document.querySelector('#categorySelect');
@@ -318,47 +317,48 @@ async function postWork(event) {
         const formData = new FormData();
         formData.append('image', imageModal);
         formData.append('title', titleModal);
-        formData.append('category', categoryModal);
+        formData.append('category', categoryModal);*/
 
-        async function postWork(event) {
-            event.preventDefault(); // Empêcher le comportement par défaut de la soumission du formulaire
-        
-            const categorySelect = document.querySelector('#categorySelect');
-            const imageFile = document.querySelector('#photoInput').files[0];
-            const titleModal = document.querySelector('#titleInput').value;
-            const categoryModal = categorySelect.value;
-            
-            // Gestion de la prévisualisation de l'image
-            const photoContainer = document.querySelector('.photoContainer');
-            const buttonAdd = document.getElementById('customPhotoButton');
-            const fileInput = document.getElementById('photoInput');
-        
-            if (imageFile) {
-                const fileReader = new FileReader();
-        
-                fileReader.onload = function(e) {
-                    // Vider le contenu précédent
-                    photoContainer.innerHTML = '';
-                    
-                    // Créer un élément image
-                    const img = document.createElement('img');
-                    img.src = e.target.result; // URL de données de l'image
-                    img.alt = 'Image téléchargée avec succès'; // Texte alternatif
-        
-                    // Ajouter l'image au conteneur
-                    photoContainer.appendChild(img);
-                    
-                    // Afficher le conteneur d'image et masquer le champ de fichier et le bouton
-                    photoContainer.style.display = 'block';
-                    fileInput.style.display = 'none';
-                    buttonAdd.style.display = 'none';
-                };
-        
-                fileReader.readAsDataURL(imageFile); 
-            }
+
+function getImg() {
+    const fileInput = document.getElementById('photoInput');
+    const photoContainer = document.querySelector('.photoContainer');
+    const buttonAdd = document.getElementById('customPhotoButton');
+
+    fileInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                photoContainer.innerHTML = `<img src="${e.target.result}" alt="Image preview" style="max-width: 100%; height: auto;">`;
+                photoContainer.style.display = 'block';
+    
+            };
+            reader.readAsDataURL(file);
         }
-    }
+    });
+}
+
+getImg ()
+
+async function postWork(event) {
+    event.preventDefault(); // Empêcher le comportement par défaut de la soumission du formulaire
         
+    const categorySelect = document.querySelector('#categorySelect');
+    const imageFile = document.querySelector('#photoInput').files[0];
+    const titleModal = document.querySelector('#titleInput').value;
+    const categoryModal = categorySelect.value;
+   
+    const formData = new FormData();
+    formData.append('image', imageModal);
+    formData.append('title', titleModal);
+    formData.append('category', categoryModal);
+ 
+    // Gestion de la prévisualisation de l'image
+    const photoContainer = document.querySelector('.photoContainer');
+    const buttonAdd = document.getElementById('customPhotoButton');
+    const fileInput = document.getElementById('photoInput');
+    
     try {
         // Récupérer le token depuis le localStorage
         const token = localStorage.getItem('token');
@@ -385,7 +385,7 @@ async function postWork(event) {
         console.error("Une erreur s'est produite lors de la requête :", error);
         alert("Une erreur est survenue lors du téléchargement de la photo.");
     }
-}
+}    
 
 function displayCategoriesInModale(categories) {
     const optionsContainer = document.querySelector('#categorySelect');
