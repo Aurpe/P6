@@ -90,9 +90,6 @@ async function deleteWork(id) {
 }
 
 
-// fetch delete : 
-// on prend l'id de l'élément cliqué, et on le supprime.
-// elementcliqué.parentNode.remove
 
 
 function getCategories (){
@@ -284,45 +281,7 @@ window.addEventListener('click', function(event) {
 });
 
 
-/* Fonction pour gérer la soumission du formulaire
-async function postWork(event) {
-    event.preventDefault(); // Empêcher le comportement par défaut de la soumission du formulaire
-
-    const categorySelect = document.querySelector('#categorySelect');
-    const imageModal = document.querySelector('#photoInput').files[0];
-    const titleModal = document.querySelector('#titleInput').value;
-    const categoryModal = categorySelect.value;
-    
-/* Gestion de la prévisualisation de l'image
-    const filePreview = document.getElementById('filePreview');
-   const photoContainer = document.querySelector('.previewImg');
-   const buttonAdd = docuement.getElementById('customPhotoButton')
-
-   if (buttonAdd) {
-    const fileReader = new FileReader ();
-    fileReader.readAsDataURL(buttonAdd);
-    console.log(fileReader);
-    fileReader.addEventListener("load", function(){
-        filePreview.style.display = "none"
-        photoContainer.style.display= "block"
-        buttonAdd.style.display= "none"
-
-    })
-   }*/
-    /*async function postWork(event) {
-        event.preventDefault(); // Empêcher le comportement par défaut de la soumission du formulaire
-    
-        const categorySelect = document.querySelector('#categorySelect');
-        const imageFile = document.querySelector('#photoInput').files[0];
-        const titleModal = document.querySelector('#titleInput').value;
-        const categoryModal = categorySelect.value;
-    
-        const formData = new FormData();
-        formData.append('image', imageModal);
-        formData.append('title', titleModal);
-        formData.append('category', categoryModal);*/
-
-        function getImg() {
+function getImg() {
             const fileInput = document.getElementById('photoInput');
             const photoContainer = document.querySelector('.photoContainer');
             const buttonAdd = document.getElementById('customPhotoButton');
@@ -335,8 +294,8 @@ async function postWork(event) {
                 if (file) {
                     const reader = new FileReader();
                     reader.onload = function(e) {
-                        photoContainer.innerHTML = `<img src="${e.target.result}" alt="Image preview" class="preview-image" style="max-width: 100%; height: auto;">`;
-                        photoContainer.style.display = 'block';
+                        preview.innerHTML = `<img src="${e.target.result}" alt="Image preview" class="preview-image">`;
+                        preview.style.display = 'block';
                         buttonAdd.style.display = 'none';
                         fileInput.style.display = 'none';
                         preview.style.display = 'block';
@@ -347,60 +306,28 @@ async function postWork(event) {
                 }
             });
         }
-        
         // Appel direct de la fonction
         getImg();
 
-        
-        
-        
-/*function getImg() {
-    const fileInput = document.getElementById('#photoInput');
-    const photoContainer = document.querySelector('.photoContainer');
-    const buttonAdd = document.getElementById('#customPhotoButton');
-    const Preview= document.querySelector('.previewImg')
-    const iconsImage= document.querySelector ('.iconsimage')
-    const formatImg= document.querySelector ('.formatImage')
-
-
-
-    fileInput.addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                photoContainer.innerHTML = `<img src="${e.target.result}" alt="Image preview" style="max-width: 100%; height: auto;">`;
-                photoContainer.style.display = 'block';
-                buttonAdd.style.display='none'
-                fileInput.style.display= 'none'
-                //Preview.style.display= 'block';
-                iconsImage.style.display= 'none';
-                formatImg.style.display= 'none'
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-}
-
-getImg ()*/
 
 async function postWork(event) {
     event.preventDefault(); // Empêcher le comportement par défaut de la soumission du formulaire
         
     const categorySelect = document.querySelector('#categorySelect');
-    const imageFile = document.querySelector('#photoInput').files[0];
+    const fileInput = document.querySelector('#photoInput').files[0];
     const titleModal = document.querySelector('#titleInput').value;
     const categoryModal = categorySelect.value;
    
     const formData = new FormData();
-    formData.append('image', imageFile);
+    formData.append('image', fileInput);
     formData.append('title', titleModal);
     formData.append('category', categoryModal);
  
     // Gestion de la prévisualisation de l'image
+    const Preview= document.querySelector ('.previewImg')
     const photoContainer = document.querySelector('.photoContainer');
     const buttonAdd = document.getElementById('customPhotoButton');
-    const fileInput = document.getElementById('photoInput');
+    //const fileInput = document.getElementById('photoInput');
     
     try {
         // Récupérer le token depuis le localStorage
@@ -432,7 +359,6 @@ async function postWork(event) {
 
 function displayCategoriesInModale(categories) {
     const optionsContainer = document.querySelector('#categorySelect');
-    //selectCategories.classList.add('catego');
    
     categories.forEach(category => {
         const selectCategories = document.createElement('option');
@@ -450,6 +376,21 @@ submitButton.addEventListener("click", postWork);
 
 
       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

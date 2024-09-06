@@ -72,9 +72,6 @@ color:white;
     align-items: baseline;
 }
 
-.modeModify{
-	display:none;
-}
 body {
 	max-width: 1140px;
 	margin:auto;
@@ -199,7 +196,6 @@ li:hover {
 
 }
 .buttonCategories{
-	display: flex;
     align-items: center;
     flex-wrap: wrap;
     flex-direction: row;
@@ -356,9 +352,10 @@ footer nav ul {
   
   label {
 	display: block;
-    margin-bottom: 5px;
-    margin-top: 5px;
-    margin-right: 22rem;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-right: 52%;
+    font-weight: bold;
   }
 	
 
@@ -419,10 +416,24 @@ footer nav ul {
     font-size: 28px;
     font-weight: bold;
 	cursor: pointer;
-	position: relative;
-    top: 20px;
-    right: 20px;
+	margin-right: 10px;
+    margin-top: 10px;
 }
+
+.iconsArrow{
+	color: black;
+    float: right;
+    font-size: 21px;
+    font-weight: bold;
+	cursor: pointer;
+}
+.contentIcons{
+	display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
 
 #validation{
 	position: relative;
@@ -476,14 +487,15 @@ footer nav ul {
 	font-weight:normal;
     margin-bottom: 30px;
     margin-top: 20px;
+	margin-left: 35%;
 }
 
 .contentTitle{
 	display: flex;
     align-items: flex-start;
-    flex-direction: row-reverse;
+    flex-direction: row;
     justify-content: space-between;
-    margin-left: 30%;
+    margin-left: 40%;
 }
 .photo-Button{
 	height: 36px;
@@ -519,7 +531,9 @@ footer nav ul {
 
 .preview-image{
 	width:129px;
-	height:193px;
+	height:169px;
+	position:absolute;
+	left:45%;
 }
 
 #loginForm {
