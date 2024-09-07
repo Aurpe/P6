@@ -516,7 +516,7 @@ footer nav ul {
 .photoContainer{
 	position: absolute;
     z-index: 1;
-    left: 43%;
+    left: 42%;
     bottom: 30%;
     display: flex;
     flex-direction: column;
