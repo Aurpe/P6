@@ -171,7 +171,7 @@ function checkUserStatus() {
         if (editionButton) editionButton.style.display = "none"; 
         if (deconnexion) deconnexion.style.display = "none";
         if (connexion) connexion.style.display = "block"; 
-        if (categoriesContainer) categoriesContainer.style.display = "block";
+        if (categoriesContainer) categoriesContainer.style.display = "flex";
         console.log("Mode Edition déconnecté");
     }
 
@@ -197,6 +197,28 @@ editionButton.addEventListener('click', function () {
 // Appel initial pour vérifier le statut
 checkUserStatus();
 
+function switchModal() {
+    const iconArrow = document.querySelector('#myModal .iconsArrow');
+    
+    if (iconArrow) {
+        iconArrow.addEventListener('click', function() {
+            // Fermer myModal
+            const myModal = document.getElementById('myModal');
+            if (myModal) {
+                myModal.style.display = 'none';
+            }
+            
+            // Ouvrir modaleGalerie
+            const modaleGalerie = document.getElementById('modaleGalerie');
+            if (modaleGalerie) {
+                modaleGalerie.style.display = 'block';
+            }
+        });
+    }
+}
+
+switchModal();
+
 // Fonction générique pour ouvrir un modal
 function openModal(modalId) {
     const modal = document.getElementById(modalId);
@@ -219,6 +241,7 @@ window.addEventListener('click', function(event) {
     const modaleGalerie = document.getElementById('modaleGalerie');
     const closeMyModal = document.querySelector('#myModal .close');
     const closeModaleGalerie = document.querySelector('#modaleGalerie .close');
+    
 
     // Fermer "myModal" si on clique en dehors ou sur le bouton de fermeture
     if (event.target === myModal || event.target === closeMyModal) {
@@ -297,7 +320,7 @@ function getImg() {
                         preview.innerHTML = `<img src="${e.target.result}" alt="Image preview" class="preview-image">`;
                         preview.style.display = 'block';
                         buttonAdd.style.display = 'none';
-                        fileInput.style.display = 'none';
+                        //fileInput.style.display = 'none';
                         preview.style.display = 'block';
                         iconsImage.style.display = 'none';
                         formatImg.style.display = 'none';
@@ -309,53 +332,63 @@ function getImg() {
         // Appel direct de la fonction
         getImg();
 
-
-async function postWork(event) {
-    event.preventDefault(); // Empêcher le comportement par défaut de la soumission du formulaire
+        async function postWork(event) {
+            event.preventDefault(); // Empêcher le comportement par défaut de la soumission du formulaire
+            
+            // Sélectionner les éléments nécessaires
+            const categorySelect = document.querySelector('#categorySelect');
+            const fileInputElement = document.querySelector('#photoInput'); // Vérifiez si l'input file existe
+            const titleModal = document.querySelector('#titleInput').value;
+            const categoryModal = categorySelect.value;
         
-    const categorySelect = document.querySelector('#categorySelect');
-    const fileInput = document.querySelector('#photoInput').files[0];
-    const titleModal = document.querySelector('#titleInput').value;
-    const categoryModal = categorySelect.value;
-   
-    const formData = new FormData();
-    formData.append('image', fileInput);
-    formData.append('title', titleModal);
-    formData.append('category', categoryModal);
- 
-    // Gestion de la prévisualisation de l'image
-    const Preview= document.querySelector ('.previewImg')
-    const photoContainer = document.querySelector('.photoContainer');
-    const buttonAdd = document.getElementById('customPhotoButton');
-    //const fileInput = document.getElementById('photoInput');
-    
-    try {
-        // Récupérer le token depuis le localStorage
-        const token = localStorage.getItem('token');
-
-        // Envoyer la requête POST avec les données du formulaire
-        let response = await fetch('http://localhost:5678/api/works', {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            },
-            body: formData
-        });
-
-        // Gérer la réponse
-        if (response.ok) {
-            let result = await response.json();
-            alert("Photo ajoutée avec succès !");
-            getWorks(); // Rafraîchir la galerie
-            closeModal(); // Ferme la modal
-        } else {
-            alert("Erreur lors de l'ajout de la photo.");
+            // Vérification si l'input file existe
+            if (!fileInputElement) {
+                console.error("L'élément #photoInput est introuvable.");
+                alert("Impossible de trouver l'input file.");
+                return;
+            }
+        
+            const fileInput = fileInputElement.files[0]; // Vérifiez si un fichier a été sélectionné
+        
+            // Vérifier si un fichier a été sélectionné
+            if (!fileInput) {
+                alert("Veuillez sélectionner un fichier avant de soumettre.");
+                return; // Ne pas continuer si aucun fichier n'est sélectionné
+            }
+        
+            const formData = new FormData();
+            formData.append('image', fileInput);
+            formData.append('title', titleModal);
+            formData.append('category', categoryModal);
+        
+            try {
+                // Récupérer le token depuis le localStorage
+                const token = localStorage.getItem('token');
+        
+                // Envoyer la requête POST avec les données du formulaire
+                let response = await fetch('http://localhost:5678/api/works', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: formData
+                });
+        
+                // Gérer la réponse
+                if (response.ok) {
+                    let result = await response.json();
+                    alert("Photo ajoutée avec succès !");
+                    getWorks(); // Rafraîchir la galerie
+                    closeModal('myModal'); // Fermer la modal
+                } else {
+                    alert("Erreur lors de l'ajout de la photo.");
+                }
+            } catch (error) {
+                console.error("Une erreur s'est produite lors de la requête :", error);
+                alert("Une erreur est survenue lors du téléchargement de la photo.");
+            }
         }
-    } catch (error) {
-        console.error("Une erreur s'est produite lors de la requête :", error);
-        alert("Une erreur est survenue lors du téléchargement de la photo.");
-    }
-}    
+ 
 
 function displayCategoriesInModale(categories) {
     const optionsContainer = document.querySelector('#categorySelect');
