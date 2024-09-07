@@ -171,7 +171,7 @@ function checkUserStatus() {
         if (editionButton) editionButton.style.display = "none"; 
         if (deconnexion) deconnexion.style.display = "none";
         if (connexion) connexion.style.display = "block"; 
-        if (categoriesContainer) categoriesContainer.style.display = "block";
+        if (categoriesContainer) categoriesContainer.style.display = "flex";
         console.log("Mode Edition déconnecté");
     }
 

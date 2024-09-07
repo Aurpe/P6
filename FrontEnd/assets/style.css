@@ -197,7 +197,8 @@ li:hover {
     flex-direction: row;
     margin-bottom: 20px;
     width: 100%;
-    justify-content: space-evenly;
+    justify-content: center;
+	gap:10px;
 }
 
 .filterCategory{
